@@ -65,8 +65,10 @@ void AnimationController::applyShape(int snapshotIndex, bool snap)
     int n = log->getTreeShape(snapshotIndex, shapeBuffer);
     layout.layoutShape(shapeBuffer, n, placeBuffer);
 
+    // Every slot must start false: nodes added below push nodeCount up, and
+    // the "vanished" loop at the end reads seen[] for those new slots too.
     bool seen[Limits::MAX_NODES_GUI];
-    for (int i = 0; i < nodeCount; i++)
+    for (int i = 0; i < Limits::MAX_NODES_GUI; i++)
     {
         seen[i] = false;
     }
@@ -130,6 +132,7 @@ void AnimationController::applyShape(int snapshotIndex, bool snap)
             }
             v.targetScale = 1.f;
             v.targetAlpha = 255.f;
+            seen[nodeCount] = true;   // a brand new room belongs to this shape
             nodeCount++;
         }
     }

@@ -26,6 +26,11 @@ public:
     int stackSize();
     void quit();
 
+    // Selects a 1:1 pixel view covering the whole window. Screens use this
+    // for panels and text instead of getDefaultView(), which keeps the size
+    // the window had at creation and so breaks when the window is resized.
+    void useUiView();
+
     // Phase 0 behaviour: print the outcome and pop the level.
     // TODO(B): open the Result screen instead.
     void levelFinished(const string& levelId, const LevelOutcome& o);

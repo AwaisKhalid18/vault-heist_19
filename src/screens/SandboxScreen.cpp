@@ -538,13 +538,14 @@ void SandboxScreen::update(float dt)
 
 void SandboxScreen::draw(sf::RenderWindow& window)
 {
+    app.useUiView();
     background.draw(window);
 
     if (treeTabActive())
     {
         camera.apply(window);
         renderer.draw(window, anim, badgeMode, hoveredId, selectedId, -1);
-        window.setView(window.getDefaultView());
+        app.useUiView();
     }
     else
     {
