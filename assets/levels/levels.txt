@@ -1,0 +1,16 @@
+# Campaign order: one level file per line. Add a level = add a file + a line.
+# Act 1 (Partner B)
+# assets/levels/act1/level_1_1.json
+# Act 2
+assets/levels/act2/level_2_1.json
+assets/levels/act2/level_2_2.json
+assets/levels/act2/level_2_3.json
+assets/levels/act2/level_2_4.json
+assets/levels/act2/level_2_5.json
+# Act 3
+assets/levels/act3/level_3_1.json
+assets/levels/act3/level_3_2.json
+assets/levels/act3/level_3_3.json
+assets/levels/act3/level_3_4.json
+assets/levels/act3/level_3_5.json
+# Act 4 (Partner B)

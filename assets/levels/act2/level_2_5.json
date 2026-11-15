@@ -1,0 +1,8 @@
+{ "id": "2.5", "act": 2, "title": "Boss: The Lazy Architect", "mission": "Escape the corridor vault",
+  "concept": "BST degeneration",
+  "briefing": "The vault's lazy architect accepted deliveries in sorted order, so the vault collapsed into one long corridor - every room hangs off the right side. Reach the deepest treasure before the shrinking alarm catches you, and learn why the architect was fired.",
+  "type": "bst_boss", "seed": 2505,
+  "generator": "sorted", "n": 10, "keyMin": 10, "keyMax": 100, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Sorted inserts always go right: the tree is as tall as it has rooms.",
+            "There is only one path - speed matters, so do not misclick."] }
