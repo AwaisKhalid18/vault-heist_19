@@ -14,6 +14,7 @@ public:
 protected:
     void onLevelStart();
     void onNodeClicked(int nodeId);
+    void onLevelUpdate(float dt);
     void onAnimationDone();
     void onDialogChoice(int button);
     bool allowUndo();

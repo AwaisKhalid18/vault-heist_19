@@ -40,6 +40,17 @@ void Level25Boss::insertNextDelivery()
     beginOperation();
     tree.insert(buildIndex * 10);   // 10, 20, 30, ... always goes right
     endOperation(true);
+    anim.setSpeed(3.f);   // the build is a cutscene, so play it briskly
+}
+
+// The build phase drives itself off the animation finishing, so never
+// leave it paused: that would stop the deliveries for good.
+void Level25Boss::onLevelUpdate(float dt)
+{
+    if (phase == PH_BUILD && state == ST_PLAY && !anim.isPlaying())
+    {
+        anim.play();
+    }
 }
 
 void Level25Boss::onAnimationDone()
@@ -52,6 +63,7 @@ void Level25Boss::onAnimationDone()
     {
         if (buildIndex < def.n)
         {
+            fitCameraToTree();   // keep the growing corridor in view
             insertNextDelivery();
         }
         else
