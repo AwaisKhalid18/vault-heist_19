@@ -31,6 +31,9 @@ LevelScreenBase::LevelScreenBase(App& a, const LevelDef& d) : app(a), def(d)
     subPanelH = 0.f;
     flashTimer = 0.f;
     objective = "";
+    briefingPending = false;
+    pendingDialog = false;
+    pendingCount = 0;
 }
 
 LevelScreenBase::~LevelScreenBase()
@@ -52,6 +55,8 @@ void LevelScreenBase::onEnter()
 
     if (state == ST_BRIEFING)
     {
+        briefingPending = true;   // park any question the level asks on startup
+        pendingDialog = false;
         restartLevel();
         dialog.open2("Level " + def.id + ": " + def.title,
                      def.briefing + "\n\nMission: " + def.mission,
@@ -267,6 +272,22 @@ void LevelScreenBase::fitCameraToTree()
 void LevelScreenBase::openCustomDialog(const string& title, const string& body,
                                        const string labels[], int count)
 {
+    if (count > Dialog::MAX_DIALOG_BUTTONS)
+    {
+        count = Dialog::MAX_DIALOG_BUTTONS;
+    }
+    if (briefingPending)
+    {
+        pendingDialog = true;
+        pendingTitle = title;
+        pendingBody = body;
+        pendingCount = count;
+        for (int i = 0; i < count; i++)
+        {
+            pendingLabels[i] = labels[i];
+        }
+        return;
+    }
     dialog.open(title, body, labels, count);
     dialogKind = DLG_CUSTOM;
 }
@@ -289,6 +310,13 @@ void LevelScreenBase::handleDialogChoice(int button)
         dialog.close();
         dialogKind = DLG_NONE;
         state = ST_PLAY;
+        briefingPending = false;
+        if (pendingDialog)
+        {
+            pendingDialog = false;
+            dialog.open(pendingTitle, pendingBody, pendingLabels, pendingCount);
+            dialogKind = DLG_CUSTOM;
+        }
         return;
     }
     if (kind == DLG_WIN)
@@ -302,8 +330,7 @@ void LevelScreenBase::handleDialogChoice(int button)
         {
             dialog.close();
             dialogKind = DLG_NONE;
-            restartLevel();
-            dialog.close();
+            restartLevel();   // may open the level's own first question
         }
         return;
     }

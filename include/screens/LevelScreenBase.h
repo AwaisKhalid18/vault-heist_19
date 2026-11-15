@@ -109,6 +109,16 @@ private:
     float flashTimer;
     sf::Text flashText;
 
+    // A level opens its first question while the briefing is still being
+    // prepared, so that request is parked here and replayed once the
+    // player closes the briefing.
+    bool briefingPending;
+    bool pendingDialog;
+    string pendingTitle;
+    string pendingBody;
+    string pendingLabels[Dialog::MAX_DIALOG_BUTTONS];
+    int pendingCount;
+
 protected:
     void flash(const string& message);     // short feedback line over the canvas
 };
