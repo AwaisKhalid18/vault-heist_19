@@ -1,0 +1,9 @@
+{ "id": "3.1", "act": 3, "title": "Read the Badges", "mission": "Flag every unbalanced room",
+  "concept": "Balance factor",
+  "briefing": "The Architect's Wing shows each room's height on a badge. Balance factor = left height minus right height. A room is safe at -1, 0 or +1; anything else strains the vault. Click every room whose balance factor breaks the rule, then press Submit.",
+  "type": "avl_badges", "seed": 3101,
+  "generator": "explicit", "n": 0, "keyMin": 10, "keyMax": 99,
+  "keys": [50, 30, 70, 20, 80, 10, 90],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Balance factor = height(left child) - height(right child); a missing child counts as 0.",
+            "Two rooms here are strained: look for height differences of 2."] }

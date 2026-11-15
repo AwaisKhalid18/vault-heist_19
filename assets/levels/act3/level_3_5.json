@@ -1,0 +1,8 @@
+{ "id": "3.5", "act": 3, "title": "Boss: Order-Statistic Heist", "mission": "Steal the k-th most valuable treasure",
+  "concept": "subtreeSize, kth, rank",
+  "briefing": "The final chamber hides its treasures by value. Your contract names the k-th MOST valuable - that is the (n-k+1)-th smallest. Each room's badge shows its subtree size: use the sizes to descend straight to the target in O(log n) rooms. Between rounds the vault rebalances itself and you must confirm the new size labels.",
+  "type": "avl_boss_kth", "seed": 3505,
+  "generator": "random", "n": 15, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 4, "lo": 0, "hi": 0,
+  "hints": ["If the left subtree holds s rooms, the current room is the (s+1)-th smallest here.",
+            "Need a smaller position? Go left. Need position p > s+1? Go right and look for position p-s-1."] }

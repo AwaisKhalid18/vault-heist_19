@@ -1,0 +1,8 @@
+{ "id": "2.1", "act": 2, "title": "Search Heist", "mission": "Find the marked treasure room",
+  "concept": "BST search",
+  "briefing": "The vault sorts its rooms: smaller keys lie left, larger keys lie right. Navigate from the entrance to the target room. Every room you enter nudges the alarm, so compare the target with each room's key and pick the correct corridor.",
+  "type": "bst_search", "seed": 2101,
+  "generator": "random", "n": 12, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Compare the target with the current room: smaller goes left, larger goes right.",
+            "The gold diamond marks the target room. Count the floors to plan your path."] }
