@@ -105,7 +105,15 @@ bool Dialog::isOpen()
 
 void Dialog::layout(float windowW, float windowH)
 {
+    // the panel has to be wide enough to hold its row of buttons
+    float buttonW = 150.f;
+    float buttonGap = 14.f;
+    float buttonsW = (float)buttonCount * buttonW + (float)(buttonCount - 1) * buttonGap;
     float w = 640.f;
+    if (buttonsW + 64.f > w)
+    {
+        w = buttonsW + 64.f;
+    }
     title.setString(pendingTitle);
     body.setString(wrap(pendingBody, 64));
     sf::FloatRect bodyBounds = body.getLocalBounds();
@@ -122,9 +130,7 @@ void Dialog::layout(float windowW, float windowH)
     title.setPosition(x + 32.f, y + 24.f);
     body.setPosition(x + 32.f, y + 86.f);
 
-    float buttonW = 150.f;
-    float totalW = (float)buttonCount * buttonW + (float)(buttonCount - 1) * 14.f;
-    float bx = x + (w - totalW) / 2.f;
+    float bx = x + (w - buttonsW) / 2.f;
     float by = y + h - 58.f;
     for (int i = 0; i < buttonCount; i++)
     {
@@ -133,7 +139,7 @@ void Dialog::layout(float windowW, float windowH)
         {
             buttons[i].setAccent(true);
         }
-        bx += buttonW + 14.f;
+        bx += buttonW + buttonGap;
     }
 }
 
