@@ -530,7 +530,10 @@ void LevelScreenBase::update(float dt)
         tooltip.hide();
     }
 
-    if (!animWasFinished && anim.isFinished())
+    // Only hand this one-shot to the level once play has actually started.
+    // A level that chains its next step off it would otherwise lose the
+    // signal to the briefing dialog and stall forever.
+    if (state == ST_PLAY && !animWasFinished && anim.isFinished())
     {
         animWasFinished = true;
         onAnimationDone();
