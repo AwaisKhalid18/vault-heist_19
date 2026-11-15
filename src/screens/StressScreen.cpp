@@ -98,10 +98,11 @@ void StressScreen::update(float dt)
 
 void StressScreen::draw(sf::RenderWindow& window)
 {
+    app.useUiView();
     background.draw(window);
     camera.apply(window);
     renderer.draw(window, anim, TreeRenderer::BADGE_NONE, -1, -1, -1);
-    window.setView(window.getDefaultView());
+    app.useUiView();
     info.setPosition(24.f, 18.f);
     window.draw(info);
 }

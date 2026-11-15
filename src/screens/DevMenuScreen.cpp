@@ -173,6 +173,7 @@ void DevMenuScreen::update(float dt)
 
 void DevMenuScreen::draw(sf::RenderWindow& window)
 {
+    app.useUiView();
     background.draw(window);
     sf::Vector2u size = window.getSize();
     float centerX = (float)size.x / 2.f;

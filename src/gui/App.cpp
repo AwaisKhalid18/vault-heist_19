@@ -105,6 +105,12 @@ void App::quit()
     wantQuit = true;
 }
 
+void App::useUiView()
+{
+    sf::Vector2u size = window.getSize();
+    window.setView(sf::View(sf::FloatRect(0.f, 0.f, (float)size.x, (float)size.y)));
+}
+
 void App::levelFinished(const string& levelId, const LevelOutcome& o)
 {
     // TODO(B): push the Result screen here instead of printing

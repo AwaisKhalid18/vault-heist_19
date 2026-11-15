@@ -80,10 +80,11 @@ void RotationDemoScreen::update(float dt)
 
 void RotationDemoScreen::draw(sf::RenderWindow& window)
 {
+    app.useUiView();
     background.draw(window);
     camera.apply(window);
     renderer.draw(window, anim, TreeRenderer::BADGE_HEIGHT, -1, -1, -1);
-    window.setView(window.getDefaultView());
+    app.useUiView();
     caption.setPosition(30.f, 18.f);
     window.draw(caption);
     logPanel.draw(window, anim.getLog(), anim.currentIndex());

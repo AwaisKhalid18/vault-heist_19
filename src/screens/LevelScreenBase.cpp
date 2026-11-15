@@ -526,13 +526,14 @@ void LevelScreenBase::update(float dt)
 
 void LevelScreenBase::draw(sf::RenderWindow& window)
 {
+    app.useUiView();
     background.draw(window);
 
     camera.apply(window);
     renderer.draw(window, anim, badgeMode, hoveredId, selectedId, targetId);
     drawCanvasOverlay(window);
 
-    window.setView(window.getDefaultView());
+    app.useUiView();
     hud.draw(window);
     logPanel.draw(window, anim.getLog(), anim.currentIndex());
     toolbar.draw(window);
