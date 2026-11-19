@@ -1,0 +1,9 @@
+{ "id": "1.2", "act": 1, "title": "Decode the Blueprint", "mission": "Rebuild the vault from two traversal lists",
+  "concept": "Reconstruction from preorder + inorder",
+  "briefing": "You have the shape of the vault but not its labels - the thief before you tore the numbers off. What you do have is two patrol logs: the preorder route and the inorder route. Preorder names the entrance first. Inorder splits every room's list into what lies left of it and what lies right. Between them there is exactly one vault they can describe. Find it.",
+  "type": "bt_build", "seed": 1202,
+  "generator": "random", "n": 7, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["The first value in the preorder list is always the entrance. Find it in the inorder list.",
+            "Everything LEFT of it in the inorder list belongs to its left subtree; everything right belongs to its right subtree.",
+            "Now repeat with the next unused preorder value on each of those two halves."] }

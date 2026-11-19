@@ -1,0 +1,9 @@
+{ "id": "1.1", "act": 1, "title": "The Patrol Route", "mission": "Predict the order the guards walk the rooms",
+  "concept": "Preorder, inorder, postorder and level order",
+  "briefing": "The blueprint wing holds no treasure worth taking, but it holds the patrol schedule. The rooms carry arbitrary numbers - there is no left-is-smaller rule here, only shape. A preorder patrol reads a room, then everything to its left, then everything to its right. Call the route correctly, room by room, and the guards will never know you were watching.",
+  "type": "bt_traversal", "seed": 1101,
+  "generator": "random", "n": 9, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Preorder is root, then the whole left subtree, then the whole right subtree - and the same rule applies again inside each subtree.",
+            "Start at the entrance. From any room, go as deep left as you can before you ever turn right.",
+            "Show me the patrol replays the real traversal, but it costs you a star."] }

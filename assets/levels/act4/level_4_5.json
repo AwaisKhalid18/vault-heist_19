@@ -1,0 +1,9 @@
+{ "id": "4.5", "act": 4, "title": "Final Vault Boss", "mission": "Sort a fresh vault from scratch and unlock the final door",
+  "concept": "Complete Heap Sort workflow",
+  "briefing": "The last door. A new vault, unsorted, and no help from the mechanism this time. Phase one: build a valid Max Heap by hand. Phase two: take the root again and again until the active heap is empty. The door opens only when the array reads in ascending order from first index to last - the complete Heap Sort, build then extract, exactly as you have practised it.",
+  "type": "heap_boss", "seed": 4505,
+  "generator": "random", "n": 12, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Phase one is level 4.1 again: start at the last parent and sift each one down.",
+            "You cannot extract until the heap is valid, because the root would not be the maximum.",
+            "Build is O(n) and the n extractions cost O(n log n), so the whole sort is O(n log n) - and the alarm budget is set from exactly that."] }

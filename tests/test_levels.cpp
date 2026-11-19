@@ -46,9 +46,12 @@ void runLevelTests(TestRunner& t)
     string error;
 
     // every campaign level file loads
-    string paths[32];
-    int levelCount = LevelLoader::loadLevelList("assets/levels/levels.txt", paths, 32);
-    bool allLoad = levelCount == 10;
+    // The campaign list also holds Partner B's acts, so this counts the Act
+    // 2-3 entries rather than assuming they are the whole file.
+    string paths[64];
+    int levelCount = LevelLoader::loadLevelList("assets/levels/levels.txt", paths, 64);
+    bool allLoad = levelCount >= 10;
+    int act23Count = 0;
     for (int i = 0; i < levelCount; i++)
     {
         LevelDef def;
@@ -56,8 +59,12 @@ void runLevelTests(TestRunner& t)
         {
             allLoad = false;
         }
+        else if (def.act == 2 || def.act == 3)
+        {
+            act23Count++;
+        }
     }
-    t.check(allLoad, "all 10 Act 2-3 level files load with id and type");
+    t.check(allLoad && act23Count == 10, "all 10 Act 2-3 level files load with id and type");
 
     // ---- 2.1 Search Heist: winnable within capacity ----
     LevelDef def;

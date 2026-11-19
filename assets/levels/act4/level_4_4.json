@@ -1,0 +1,9 @@
+{ "id": "4.4", "act": 4, "title": "Race Against the Guards", "mission": "Empty the whole vault before the alarm fills",
+  "concept": "Heap Sort steps and complexity",
+  "briefing": "The guards are coming and the whole vault has to be emptied, not just the top of it. Every extraction is one step: swap the root with the last active chamber, shrink the heap, sift down. There are n of them and each sift walks at most log n floors, which is exactly why Heap Sort costs n log n and why your alarm budget is what it is. No shortcuts, no searching, no second chances.",
+  "type": "heap_race", "seed": 4404,
+  "generator": "heap", "n": 14, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Every room must leave the active heap, so there are exactly n extractions. Do not waste a step on a wrong click.",
+            "The sorted region fills from the right, and it is always in ascending order.",
+            "If a wrong swap has left the heap broken, Heapify repairs it for one step - cheaper than fighting it by hand."] }

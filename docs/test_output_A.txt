@@ -318,4 +318,24 @@
 [PASS] 10,000 random heap operations: isMaxHeap held after every step
 [PASS] the random run exercised both inserts and extractions (3360 inserts, 3330 extractions)
 
-==== Summary: 302 passed, 0 failed ====
+-- Levels (Acts 1 and 4) --
+[PASS] every Partner B level file loads with id, type, briefing and hints
+[PASS] the campaign lists all 5 Act 1 levels (found 5)
+[PASS] the campaign lists all 5 Act 4 levels (found 5)
+[PASS] all 5 Act 1 levels build a tree of the size their file asks for
+[PASS] every Act 1 tree has between 6 and 15 rooms, as the spec requires
+[PASS] every Act 1 level's preorder + inorder rebuilds its own tree
+[PASS] every Act 1 level's alarm capacity exceeds its optimal path
+[PASS] the same seed rebuilds exactly the same Act 1 vault
+[PASS] Act 1 room values are distinct, so the rebuild is unique
+[PASS] all 5 Act 4 level files load and build an array of the right size
+[PASS] every Act 4 level can be finished inside its own alarm capacity
+[PASS] every Act 4 level leaves a valid heap after a perfect play
+[PASS] the "heap" generator produces a valid Max Heap
+[PASS] the "disturbed" generator really does break the heap
+[PASS] a disturbed vault can always be repaired
+[PASS] descending input is already a valid Max Heap
+[PASS] the "sorted" generator produces ascending input
+[PASS] the same seed rebuilds exactly the same Act 4 vault
+
+==== Summary: 320 passed, 0 failed ====

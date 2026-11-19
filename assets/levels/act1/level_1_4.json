@@ -1,0 +1,9 @@
+{ "id": "1.4", "act": 1, "title": "Where the Routes Meet", "mission": "Find the lowest common ancestor and trace the path to it",
+  "concept": "LCA and the path between two rooms",
+  "briefing": "Two of your crew are pinned in different rooms, marked in gold. Both will run for the entrance, and the first room they both pass through is where you meet them. In a general binary tree there is no ordering to help you - you follow each room up to the entrance and find the deepest room both routes share. Pick it, then walk there from the entrance yourself.",
+  "type": "bt_lca", "seed": 1404,
+  "generator": "random", "n": 11, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Trace each marked room up to the entrance. Write both routes down in entrance-first order.",
+            "Walk the two routes together from the entrance. The last room they agree on is the meeting room.",
+            "If one marked room is above the other, the higher one IS the meeting room."] }
