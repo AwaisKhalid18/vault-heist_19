@@ -136,14 +136,15 @@ void ArrayView::draw(sf::RenderWindow& window, HeapAnimator& anim,
     float top = rowTop();
 
     // ---- the two region labels, drawn above the cells they describe ----
-    labelText.setFillColor(Theme::currentVisit());
-    labelText.setString("ACTIVE HEAP [0.." + TextUtil::intToText(heapSize - 1) + "]");
-    if (heapSize <= 0)
+    // Once the heap is empty the whole row is the sorted region, so the
+    // active label is dropped rather than drawn on top of the sorted one.
+    if (heapSize > 0)
     {
-        labelText.setString("ACTIVE HEAP (empty)");
+        labelText.setFillColor(Theme::currentVisit());
+        labelText.setString("ACTIVE HEAP [0.." + TextUtil::intToText(heapSize - 1) + "]");
+        labelText.setPosition(left, posY + 4.f);
+        window.draw(labelText);
     }
-    labelText.setPosition(left, posY + 4.f);
-    window.draw(labelText);
 
     if (n > heapSize)
     {

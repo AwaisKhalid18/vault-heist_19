@@ -20,6 +20,7 @@ protected:
     void onNodeClicked(int nodeId);
     void onOperation(int buttonIndex);
     void onLevelEvent(const sf::Event& e);
+    void drawCanvasOverlay(sf::RenderWindow& window);
     void drawUiOverlay(sf::RenderWindow& window);
     string tooltipFor(int nodeId);
 

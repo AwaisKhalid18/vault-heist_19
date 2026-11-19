@@ -41,7 +41,7 @@ void SettingsScreen::layout()
     panel.setFillColor(Theme::panel());
     panel.setOutline(Theme::panelBorder(), 1.f);
 
-    speedSlider.init(x + 300.f, y + 86.f, 280.f);
+    speedSlider.init(x + 300.f, y + 86.f, 230.f);
     float buttonX = x + 300.f;
     float buttonW = 280.f;
     validateButton.init(&app.uiFont, "", buttonX, y + 126.f, buttonW, 44.f);
@@ -179,7 +179,7 @@ void SettingsScreen::draw(sf::RenderWindow& window)
     window.draw(label);
     label.setFillColor(Theme::gold());
     label.setString(TextUtil::intToText((int)(sliderToSpeed() * 100.f)) + "%");
-    label.setPosition(panel.left() + panel.width() - 90.f, panel.top() + 76.f);
+    label.setPosition(panel.left() + panel.width() - 76.f, panel.top() + 76.f);
     window.draw(label);
 
     label.setFillColor(Theme::text());

@@ -122,6 +122,9 @@ void Level45Boss::onOperation(int buttonIndex)
             heap.extractMax(taken);
         }
         endOperation(true);
+        // this one batch is every remaining extraction at once, so it plays
+        // fast; the speed slider still overrides it
+        anim.setSpeed(4.f);
         addAlarm(remaining);
     }
 }

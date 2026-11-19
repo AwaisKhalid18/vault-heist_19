@@ -282,6 +282,61 @@ string Level12Rebuild::tooltipFor(int nodeId)
     return "";
 }
 
+// An unfilled room still carries the BLANK sentinel as its key, and the shared
+// renderer prints whatever key it is given. So the sentinel is painted over
+// here with a question mark, which is what an empty slot should look like.
+void Level12Rebuild::drawCanvasOverlay(sf::RenderWindow& window)
+{
+    if (!fontReady)
+    {
+        lineText.setFont(app.monoFont);
+        lineText.setCharacterSize(Theme::monoSize());
+        fontReady = true;
+    }
+
+    NodeStack stack;
+    if (tree.getRoot() != nullptr)
+    {
+        stack.push(tree.getRoot());
+    }
+    sf::CircleShape cover;
+    while (!stack.isEmpty())
+    {
+        TreeNode* node = stack.pop();
+        if (node->right != nullptr)
+        {
+            stack.push(node->right);
+        }
+        if (node->left != nullptr)
+        {
+            stack.push(node->left);
+        }
+        if (node->key != BLANK)
+        {
+            continue;
+        }
+        NodeVisual* v = anim.findById(node->id);
+        if (v == nullptr)
+        {
+            continue;
+        }
+        float r = Theme::nodeRadius() * 0.76f;
+        cover.setRadius(r);
+        cover.setOrigin(r, r);
+        cover.setPosition(v->x, v->y);
+        cover.setFillColor(node->id == selectedId ? Theme::nodeDiscLit() : Theme::nodeDisc());
+        window.draw(cover);
+
+        lineText.setCharacterSize(18);
+        lineText.setString("?");
+        sf::FloatRect qb = lineText.getLocalBounds();
+        lineText.setPosition(v->x - qb.width / 2.f - qb.left, v->y - qb.height / 2.f - qb.top);
+        lineText.setFillColor(node->id == selectedId ? Theme::gold() : Theme::dimText());
+        window.draw(lineText);
+        lineText.setCharacterSize(Theme::monoSize());
+    }
+}
+
 string Level12Rebuild::listToText(const int values[], int n)
 {
     string out = "";
