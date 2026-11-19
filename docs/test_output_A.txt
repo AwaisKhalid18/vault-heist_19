@@ -1,0 +1,321 @@
+==== Vault Heist - Partner A + Partner B test suite ====
+
+-- Core --
+[PASS] NodeStack grows to 200 entries
+[PASS] NodeStack pops everything back
+[PASS] NodeStack pop on empty returns nullptr
+[PASS] NodeQueue keeps FIFO order through growth
+[PASS] Random: same seed gives the same sequence
+[PASS] Random: nextInt stays inside [lo, hi]
+[PASS] Random: shuffle keeps every element
+[PASS] TextUtil: -407 to text
+[PASS] TextUtil: text to 1234
+[PASS] TextUtil: rejects broken numbers
+[PASS] alarmCapacity(4) = ceil(6)+2 = 8
+[PASS] alarmCapacity(5) = ceil(7.5)+2 = 10
+[PASS] 3 stars: steps == optimal, no penalties
+[PASS] 2 stars: steps <= 1.25x optimal, 1 penalty
+[PASS] 1 star: completed within capacity
+[PASS] 0 stars: alarm full
+[PASS] hint caps the stars at 2
+[PASS] score formula
+[PASS] score never goes below 0
+[PASS] LevelLoader: loads level_2_1.json
+[PASS] LevelLoader: id, act and type are right
+[PASS] LevelLoader: numbers are right
+[PASS] LevelLoader: hints array was read
+[PASS] LevelLoader: levels.txt lists at least 10 levels
+
+-- BST --
+[PASS] insert: size is 7
+[PASS] insert: height is 3 (leaf = 1)
+[PASS] search finds and misses correctly
+[PASS] valid after inserts: 
+[PASS] duplicate root key rejected
+[PASS] duplicate inner key rejected
+[PASS] size unchanged after duplicates
+[PASS] delete leaf 20
+[PASS] leaf really gone
+[PASS] valid after leaf delete: 
+[PASS] 40 has one child
+[PASS] delete node with one left child
+[PASS] child 35 took 40's place
+[PASS] valid after one-left-child delete: 
+[PASS] delete node with one right child
+[PASS] child 45 took 40's place
+[PASS] valid after one-right-child delete: 
+[PASS] 30 has two children
+[PASS] delete node with two children
+[PASS] successor kept, 30 gone
+[PASS] valid after two-children delete: 
+[PASS] delete the root
+[PASS] root gone, others stay
+[PASS] valid after root delete: 
+[PASS] deleting a missing key returns false
+[PASS] deleteCaseOf on missing key
+[PASS] findMin is 20
+[PASS] findMax is 80
+[PASS] min/max on empty tree fail
+[PASS] successor of 40 is 50
+[PASS] successor works for a missing key
+[PASS] 80 has no successor
+[PASS] predecessor of 50 is 40
+[PASS] 20 has no predecessor
+[PASS] range [30,70] holds 5 keys
+[PASS] range result is sorted and correct
+[PASS] empty range returns 0
+[PASS] range [75,85] visits at most 3 rooms (pruning works), visited 3
+[PASS] 1st smallest is 20
+[PASS] 4th smallest is 50
+[PASS] 7th smallest is 80
+[PASS] 8th smallest does not exist
+[PASS] LCA of 20 and 40 is 30
+[PASS] LCA of 40 and 60 is 50
+[PASS] LCA of 30 and its child 40 is 30
+[PASS] LCA with a missing key fails
+[PASS] path to the root is 1 room
+[PASS] path to 20 is 3 rooms
+[PASS] inorderKeys returns all keys sorted
+[PASS] 10,000 sorted inserts give height 10,000
+[PASS] search still works at depth 10,000
+[PASS] clear() empties the deep tree without crashing
+[PASS] copyFrom keeps node ids
+[PASS] copy is a valid BST: 
+[PASS] copyFrom keeps nextId (new nodes get the same id)
+
+-- AVL --
+[PASS] insert 30,20,10 triggers LL
+[PASS] LL: 20 became the root
+[PASS] LL: tree valid after repair: 
+[PASS] insert 10,20,30 triggers RR
+[PASS] RR: 20 became the root
+[PASS] RR: tree valid after repair: 
+[PASS] insert 30,10,20 triggers LR
+[PASS] LR: 20 became the root
+[PASS] LR: tree valid after repair: 
+[PASS] insert 10,30,20 triggers RL
+[PASS] RL: 20 became the root
+[PASS] RL: tree valid after repair: 
+[PASS] delete 70 from the BF-0 example
+[PASS] deletion with BF 0 on the heavy child uses a single rotation
+[PASS] valid after that deletion: 
+[PASS] delete 30 forcing an RL repair
+[PASS] valid after RL deletion repair: 
+[PASS] caseAt sees the LL violation
+[PASS] predictInsert foresees LL
+[PASS] predictInsert foresees LR
+[PASS] predictInsert foresees no rotation
+[PASS] predictInsert changed nothing
+[PASS] tree untouched by predictions: 
+[PASS] manual mode: tree is unbalanced before repair
+[PASS] manual rotateRightAt works
+[PASS] manual rotation fixed the balance
+[PASS] still a valid BST: 
+[PASS] rotateLeftAt without a right child is refused
+[PASS] rotateLeftAt lifted 70 to the root
+[PASS] rotateRightAt restored 50
+[PASS] rotations never change the inorder sequence
+[PASS] 2,000-op run: validator passed after every operation
+[PASS] 2,000-op run: size always matched the reference
+[PASS] 2,000-op run: kth always matched the sorted array
+[PASS] 2,000-op run: rank always matched the sorted array
+[PASS] countInRange(100,300) matches
+[PASS] 10,000-op stress run stayed valid: 
+[PASS] stress tree height is O(log n): height 13 for n 1377
+
+-- TreeValidator --
+[PASS] healthy structure passes
+[PASS] healthy BST passes
+[PASS] healthy AVL passes
+[PASS] wrong order is caught: 
+[PASS] wrong height is caught: ordering broken: 50 after 90
+[PASS] wrong size is caught: stored height of 50 is 9, expected 2
+[PASS] bad parent pointer is caught: stored size of 50 is 7, expected 2
+[PASS] cycle is caught: bad parent pointer at left child of 50
+[PASS] a chain is still a valid BST
+[PASS] the AVL check flags it: bad parent pointer at left child of 30
+
+-- Events --
+[PASS] search 40 writes 3 VISIT and 3 COMPARE events
+[PASS] COMPARE events equal the comparison counter
+[PASS] the batch ends with DONE
+[PASS] COMPARE events carry the chosen side
+[PASS] nullptr log: no events written
+[PASS] INSERT event carries a snapshot
+[PASS] the INSERT snapshot matches the real tree
+[PASS] RR insert writes a ROTATE event
+[PASS] the ROTATE event says RR via a left rotation
+[PASS] the ROTATE snapshot matches the real tree
+[PASS] BALANCE_ALERT comes before the ROTATE
+[PASS] two-children delete: SWAP_VALUE then UNLINK
+[PASS] the UNLINK snapshot matches the real tree
+[PASS] saveArray / getArray round trip
+
+-- Levels (Acts 2-3) --
+[PASS] all 10 Act 2-3 level files load with id and type
+[PASS] 2.1 builds a 12-room vault
+[PASS] 2.1 tree is a valid BST: 
+[PASS] 2.1 target lies at least 3 rooms deep
+[PASS] 2.1 perfect play wins: optimal 7 < capacity 13
+[PASS] 2.1 full alarm means 0 stars (retry)
+[PASS] 2.2 scripted insert 48 works
+[PASS] 2.2 scripted insert 15 works
+[PASS] 2.2 scripted insert 85 works
+[PASS] 2.2 perfect play fits in the alarm capacity
+[PASS] 2.2 tree stays valid: 
+[PASS] 2.3 offers a leaf deletion
+[PASS] 2.3 offers a one-child deletion
+[PASS] 2.3 offers a two-children deletion
+[PASS] 2.3 perfect deletions fit in the capacity
+[PASS] 2.4 range holds at least 3 treasures, holds 5
+[PASS] 2.4 pruned query skips part of the vault (7 of 14 rooms)
+[PASS] 2.4 collecting the range fits inside the optimal walk
+[PASS] 2.5 sorted inserts degenerate into a corridor of height n
+[PASS] 2.5 is winnable despite the shrinking capacity
+[PASS] 3.1 has exactly 2 unbalanced rooms, found 2
+[PASS] 3.2 shows LL at least twice (2)
+[PASS] 3.2 shows RR at least twice (3)
+[PASS] 3.2 fully repaired in the end: 
+[PASS] 3.3 shows LR at least twice (2)
+[PASS] 3.3 shows RL at least twice (2)
+[PASS] 3.4 script contains LL, RR, LR and RL predictions
+[PASS] Act 3 overall: every rotation type appears at least twice
+[PASS] 3.5 tree is a valid AVL: 
+[PASS] 3.5 the target treasure exists
+[PASS] 3.5 the descent is at most the tree height
+[PASS] 3.5 perfect descent fits in the capacity
+
+-- BinaryTree (Act 1) --
+[PASS] preorderRec matches the hand-worked example (1 2 4 5 3 6 7)
+[PASS] preorderIter equals preorderRec
+[PASS] inorderRec matches the hand-worked example (4 2 5 1 3 7 6)
+[PASS] inorderIter equals inorderRec
+[PASS] postorderRec matches the hand-worked example (4 5 2 7 6 3 1)
+[PASS] postorderIter equals postorderRec
+[PASS] levelOrder matches the hand-worked example (1 2 3 4 5 6 7)
+[PASS] empty tree: preorderRec writes nothing
+[PASS] empty tree: preorderIter writes nothing
+[PASS] empty tree: inorderIter writes nothing
+[PASS] empty tree: postorderIter writes nothing
+[PASS] empty tree: levelOrder writes nothing
+[PASS] empty tree has height 0
+[PASS] empty tree has diameter 0
+[PASS] empty tree counts as symmetric
+[PASS] empty tree has no root
+[PASS] single node has height 1 (leaf height = 1)
+[PASS] single node has diameter 1
+[PASS] single node: one id in preorder
+[PASS] single node is symmetric
+[PASS] left chain of 5 has height 5
+[PASS] left chain of 5 has diameter 5
+[PASS] preorderRec stops at maxCount
+[PASS] preorderIter stops at maxCount
+[PASS] inorderIter stops at maxCount
+[PASS] levelOrder stops at maxCount
+[PASS] postorder + inorder rebuilds the same tree
+[PASS] preorder + inorder round trip is stable
+[PASS] round trip keeps the height
+[PASS] building from 0 rooms leaves an empty tree
+[PASS] rebuilding replaces the previous tree
+[PASS] example tree has height 4 (1 -> 3 -> 6 -> 7)
+[PASS] example tree has diameter 6 rooms
+[PASS] level order returns every room
+[PASS] LCA of rooms 4 and 5 is room 2
+[PASS] LCA of rooms 4 and 7 is the root
+[PASS] LCA of a room and its own child is that room
+[PASS] LCA reports false when a room is missing
+[PASS] LCA reports false when both rooms are missing
+[PASS] path to room 7 is 4 rooms long and starts at the root
+[PASS] path to the root is just the root
+[PASS] path to a missing room is empty
+[PASS] two identical builds compare as the same tree
+[PASS] the example tree is not symmetric
+[PASS] mirroring changes the tree
+[PASS] mirroring reverses the inorder traversal
+[PASS] mirroring twice returns to the original
+[PASS] mirroring keeps the height
+[PASS] a mirror-image tree reports itself symmetric
+[PASS] 300 random shapes: recursive and iterative traversals always agree
+[PASS] 300 random shapes: every room has a valid root path
+[PASS] 300 random shapes: height <= diameter <= room count
+[PASS] 300 random shapes: mirroring twice is the identity
+
+-- MaxHeap and Heap Sort (Act 4) --
+[PASS] root's children are at index 1 and 2
+[PASS] index 3 has children 7 and 8
+[PASS] index 1 and 2 share parent 0
+[PASS] index 7 and 8 share parent 3
+[PASS] parentOf undoes leftOf and rightOf
+[PASS] building from an empty array
+[PASS] an empty heap satisfies the heap property
+[PASS] validator accepts the empty heap
+[PASS] building from one element
+[PASS] a single element is a valid Max Heap
+[PASS] the largest value ends up at the root
+[PASS] random input builds a valid Max Heap
+[PASS] build keeps all nine values active
+[PASS] an already-sorted descending array is already a heap
+[PASS] building an already-valid heap needs no swaps
+[PASS] reverse-sorted input still lifts the maximum to the root
+[PASS] reverse-sorted input builds a valid Max Heap
+[PASS] an all-duplicates array is a valid Max Heap
+[PASS] negative values heap correctly
+[PASS] the disturbed array is not a Max Heap yet
+[PASS] siftDown at the root repairs the heap
+[PASS] siftDown lifts the larger child to the root
+[PASS] heapify repairs a scrambled array
+[PASS] heapify brings the maximum to the root
+[PASS] a new maximum sifts all the way up to the root
+[PASS] insert grows both counts
+[PASS] the heap is still valid after an insert
+[PASS] a small insert does not disturb the root
+[PASS] the array grows past its first capacity
+[PASS] 400 inserts leave a valid Max Heap
+[PASS] extracting from an empty heap reports false
+[PASS] extractMax always returns the current root
+[PASS] the remaining heap stays valid after every extraction
+[PASS] successive extractions come out in descending order
+[PASS] the active heap is empty once everything is extracted
+[PASS] the extracted values stay in the array as the sorted region
+[PASS] repeated extraction leaves the array sorted ascending
+[PASS] extracting past the end reports false
+[PASS] swapping a parent with its child is allowed
+[PASS] the swap really exchanged the two cells
+[PASS] the swap works in either argument order
+[PASS] swapping back restores the original
+[PASS] swapping two siblings is rejected
+[PASS] swapping a room with its grandchild is rejected
+[PASS] swapping a cell with itself is rejected
+[PASS] a negative index is rejected
+[PASS] an index past the heap is rejected
+[PASS] a cell outside the active heap cannot be swapped
+[PASS] heapSort on an empty array does nothing and does not crash
+[PASS] heapSort of a single element
+[PASS] heapSort matches the reference on random input
+[PASS] heapSort handles already-sorted input
+[PASS] heapSort handles reverse-sorted input
+[PASS] heapSort handles duplicate-heavy input
+[PASS] heapSort handles negative values
+[PASS] heapSort leaves the live heap untouched
+[PASS] heapSort leaves the live active heap size untouched
+[PASS] 200 random arrays: heapSort always matches the reference sort
+[PASS] building a heap counts comparisons
+[PASS] building this heap needs swaps
+[PASS] resetCounters clears both counters
+[PASS] both construction routes give a heap
+[PASS] bottom-up construction swaps fewer times than repeated insertion (59 vs 264)
+[PASS] extraction shrank the active heap
+[PASS] load restores the exact saved state
+[PASS] load clamps an oversized active heap size
+[PASS] load clamps a negative active heap size
+[PASS] validator accepts a correct Max Heap
+[PASS] a passing check leaves the error message empty
+[PASS] validator rejects a child above its parent
+[PASS] a failing check explains itself: index 4 (95) > parent index 1 (70)
+[PASS] values outside the active heap are not part of the heap property
+[PASS] validator rejects an unsorted sorted region
+[PASS] 10,000 random heap operations: the validator passed after every step
+[PASS] 10,000 random heap operations: isMaxHeap held after every step
+[PASS] the random run exercised both inserts and extractions (3360 inserts, 3330 extractions)
+
+==== Summary: 302 passed, 0 failed ====

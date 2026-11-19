@@ -1,0 +1,8 @@
+{ "id": "2.4", "act": 2, "title": "Range Raid", "mission": "Grab every treasure between the two keys",
+  "concept": "Range query with pruning",
+  "briefing": "Tonight's order: every treasure with a key between the two bounds. Collect them all - but a clever thief never wanders into a wing that cannot hold a wanted key. After the raid the vault shows which wings a pruned search would have skipped.",
+  "type": "bst_range", "seed": 2404,
+  "generator": "random", "n": 14, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 35, "hi": 65,
+  "hints": ["If a room's key is below the range, nothing in its left wing can be in range.",
+            "Collect rooms in sorted order to walk the same path the pruned query takes."] }
