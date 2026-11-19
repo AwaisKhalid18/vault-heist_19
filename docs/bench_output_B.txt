@@ -1,0 +1,87 @@
+﻿Vault Heist benchmarks. Events disabled, median of 5 runs.
+
+== Height comparison and search cost ==
+n      | input  | tree | height | avg cmp/search | time 10k searches (ms)
+-------+--------+------+--------+----------------+-----------------------
+   100 | sorted |  BST |    100 |        50.7329 | 3.429
+   100 | sorted |  AVL |      7 |         5.8257 | 1.016
+   100 | random |  BST |     16 |         8.0319 | 1.124
+   100 | random |  AVL |      8 |         5.8428 | 1.086
+  1000 | sorted |  BST |   1000 |        504.663 | 29.411
+  1000 | sorted |  AVL |     10 |         8.9858 | 1.552
+  1000 | random |  BST |     20 |        11.6038 | 1.752
+  1000 | random |  AVL |     12 |         9.2129 | 1.563
+ 10000 | sorted |  BST |  10000 |        4822.76 | 294.559
+ 10000 | sorted |  AVL |     14 |          12.35 | 2.256
+ 10000 | random |  BST |     30 |        16.2515 | 2.569
+ 10000 | random |  AVL |     16 |        12.5497 | 2.301
+
+== AVL rotation count ==
+n      | input  | rot/insert | rot/delete | max rot in one delete
+-------+--------+------------+------------+----------------------
+   100 | sorted |       0.93 |   0.123077 | 2
+   100 | random |       0.81 |   0.292308 | 3
+  1000 | sorted |       0.99 |   0.226562 | 4
+  1000 | random |      0.679 |   0.321875 | 4
+ 10000 | sorted |     0.9986 |   0.214581 | 4
+ 10000 | random |     0.7018 |   0.383317 | 6
+
+== Order statistics: kth on AVL vs inorder scan on BST ==
+n      | AVL kth 1000 queries (ms) | BST scan 1000 queries (ms)
+-------+---------------------------+---------------------------
+   100 |                     0.209 | 0.564
+  1000 |                     0.274 | 2.765
+ 10000 |                     0.484 | 55.066
+
+== Heap construction: bottom-up build vs n separate inserts ==
+n      | input  | method     | time (ms) | comparisons | swaps
+-------+--------+------------+-----------+-------------+----------
+   100 | random | buildMaxHeap | 0.0006135 |         171 | 62
+   100 | random |  n inserts | 0.0129555 |         203 | 106
+   100 | sorted | buildMaxHeap |  0.000803 |         190 | 96
+   100 | sorted |  n inserts |  0.009008 |         480 | 480
+  1000 | random | buildMaxHeap |   0.00647 |        1839 | 710
+  1000 | random |  n inserts |   0.13521 |        2165 | 1174
+  1000 | sorted | buildMaxHeap |  0.007675 |        1982 | 992
+  1000 | sorted |  n inserts |  0.129675 |        7987 | 7987
+ 10000 | random | buildMaxHeap |   0.09345 |       18807 | 7422
+ 10000 | random |  n inserts |    1.3816 |       22700 | 12711
+ 10000 | sorted | buildMaxHeap |    0.0817 |       19982 | 9992
+ 10000 | sorted |  n inserts |    1.6782 |      113631 | 113631
+
+== Heap Sort ==
+n      | input      | time (ms) | comparisons | swaps  | cmp / (n log2 n)
+-------+------------+-----------+-------------+--------+------------------
+   100 |     random |  0.004792 |        1032 |    577 | 1.72
+   100 |     sorted | 0.0054415 |        1081 |    640 | 1.80167
+   100 |    reverse |  0.005716 |         944 |    516 | 1.57333
+   100 | duplicates |   0.00417 |        1002 |    533 | 1.67
+  1000 |     random |  0.082845 |       16893 |   9073 | 1.877
+  1000 |     sorted |  0.082475 |       17583 |   9708 | 1.95367
+  1000 |    reverse |  0.076065 |       15965 |   8316 | 1.77389
+  1000 | duplicates |   0.07554 |       15728 |   8229 | 1.74756
+ 10000 |     random |   1.11205 |      235393 | 124197 | 1.81072
+ 10000 |     sorted |   1.12805 |      244460 | 131956 | 1.88046
+ 10000 |    reverse |   1.06065 |      226682 | 116696 | 1.74371
+ 10000 | duplicates |    1.0467 |      217009 | 112143 | 1.6693
+
+== Heap Sort against the other sorting algorithms (random input) ==
+n      | algorithm  | time (ms) | comparisons | moves    | extra space
+-------+------------+-----------+-------------+----------+-------------
+   100 |       heap | 0.0050115 |        1030 |      589 | O(1)
+   100 |  insertion |  0.001074 |        2656 |     2662 | O(1)
+   100 |  selection | 0.0136365 |        4950 |       95 | O(1)
+   100 |      merge | 0.0016115 |         547 |      672 | O(n)
+   100 |      quick |  0.000764 |         939 |      156 | O(log n) stack
+  1000 |       heap |  0.085155 |       16841 |     9073 | O(1)
+  1000 |  insertion |  0.109455 |      253422 |   253430 | O(1)
+  1000 |  selection |   1.42248 |      499500 |      989 | O(1)
+  1000 |      merge |  0.034915 |        8708 |     9976 | O(n)
+  1000 |      quick |  0.011335 |       14068 |     2313 | O(log n) stack
+ 10000 |       heap |   1.13625 |      235128 |   123987 | O(1)
+ 10000 |  insertion |    10.118 |    25085031 | 25085040 | O(1)
+ 10000 |  selection |   146.441 |    49995000 |     9988 | O(1)
+ 10000 |      merge |   0.75435 |      120430 |   133616 | O(n)
+ 10000 |      quick |    0.6536 |      177857 |    31659 | O(log n) stack
+
+CSV files written to bench/results/
