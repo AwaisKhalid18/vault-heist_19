@@ -40,8 +40,9 @@ public:
     // the window had at creation and so breaks when the window is resized.
     void useUiView();
 
-    // Phase 0 behaviour: print the outcome and pop the level.
-    // TODO(B): open the Result screen instead.
+    // Records the result, writes the save file and swaps the level for the
+    // Result screen. The swap is deferred, because this is called from inside
+    // the level screen's own event handler.
     void levelFinished(const string& levelId, const LevelOutcome& o);
 
     sf::RenderWindow window;

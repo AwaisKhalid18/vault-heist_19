@@ -1,6 +1,7 @@
 #pragma once
 
-// TODO(B): Partner B implements the heap invariant check.
+// Checks the Max Heap invariant: no child may beat its parent inside the
+// active heap, and the sorted region beyond it must read in ascending order.
 
 #include <string>
 #include "model/MaxHeap.h"

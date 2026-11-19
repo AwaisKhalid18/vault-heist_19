@@ -87,7 +87,7 @@ void DevMenuScreen::openLevel(int index)
     }
     else
     {
-        cout << "Level type " << levelDefs[index].type << " is not available yet (TODO(B))" << endl;
+        cout << "Level type " << levelDefs[index].type << " has no screen registered" << endl;
     }
 }
 
