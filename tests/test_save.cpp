@@ -8,8 +8,6 @@
 // SaveManager tests: campaign progress, the leaderboard table, the settings,
 // and the two serialisation formats section 8 of the spec specifies.
 
-static const char* SAVE_PATH = "vault_heist_test_save.txt";
-
 static void testProgress(TestRunner& t)
 {
     SaveManager save;
@@ -87,10 +85,11 @@ static void testSaveAndLoad(TestRunner& t)
     written.validateAfterEachStep = true;
     written.showTooltips = false;
     written.endlessSeed = 4242;
-    t.check(written.save(SAVE_PATH), "the save file is written");
+    string savePath = "vault_heist_test_save.txt";   // a local, never a global
+    t.check(written.save(savePath), "the save file is written");
 
     SaveManager read;
-    t.check(read.load(SAVE_PATH), "the save file is read back");
+    t.check(read.load(savePath), "the save file is read back");
     t.check(read.starsFor("1.1") == 3 && read.bestScoreFor("1.1") == 910,
             "level progress survives a save and load");
     t.check(read.totalStars() == 6, "every level's stars survive");
