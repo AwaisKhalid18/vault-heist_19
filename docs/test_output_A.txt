@@ -338,4 +338,52 @@
 [PASS] the "sorted" generator produces ascending input
 [PASS] the same seed rebuilds exactly the same Act 4 vault
 
-==== Summary: 320 passed, 0 failed ====
+-- SaveManager --
+[PASS] a fresh save has no stars
+[PASS] an unplayed level has no stars
+[PASS] an unplayed level is not cleared
+[PASS] a finished level records its stars and score
+[PASS] a level with stars counts as cleared
+[PASS] a worse replay does not lower the recorded best
+[PASS] a better replay raises the recorded best
+[PASS] total stars adds every level up
+[PASS] clear() wipes the progress
+[PASS] the leaderboard starts empty
+[PASS] three runs are recorded
+[PASS] the leaderboard is sorted highest first
+[PASS] the lowest run sits last
+[PASS] the leaderboard never grows past its limit
+[PASS] the leaderboard stays sorted after many entries
+[PASS] the best run of all is still on top
+[PASS] a run too slow for the table is dropped
+[PASS] the save file is written
+[PASS] the save file is read back
+[PASS] level progress survives a save and load
+[PASS] every level's stars survive
+[PASS] the leaderboard survives
+[PASS] the animation speed setting survives
+[PASS] the validator setting survives
+[PASS] the tooltip setting survives
+[PASS] the endless seed survives
+[PASS] loading a missing save file fails cleanly instead of crashing
+[PASS] a failed load leaves an empty save
+[PASS] a tree serialises as preorder with null markers (50 30 # # 70 60 # # #)
+[PASS] that text loads back
+[PASS] the reloaded tree is identical
+[PASS] an empty tree serialises as a single marker
+[PASS] a single room serialises with both children missing
+[PASS] a truncated save string is rejected
+[PASS] a save string with rubbish in it is rejected
+[PASS] a save string with trailing rubbish is rejected
+[PASS] 200 random vaults survive a save and load unchanged
+[PASS] a heap serialises as its array plus the active size (90 70 80 10 20 30 | 6)
+[PASS] that text loads back
+[PASS] the reloaded heap matches value for value
+[PASS] the reloaded heap is still a valid Max Heap
+[PASS] a half-sorted heap loads back
+[PASS] the active heap size and the sorted region both survive
+[PASS] the resumed active heap is still valid
+[PASS] an empty heap round trips
+[PASS] a heap save string with rubbish in it is rejected
+
+==== Summary: 366 passed, 0 failed ====

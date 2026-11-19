@@ -10,6 +10,7 @@ void runLevelTests(TestRunner& t);
 void runBinaryTreeTests(TestRunner& t);
 void runHeapTests(TestRunner& t);
 void runLevelBTests(TestRunner& t);
+void runSaveTests(TestRunner& t);
 
 int main()
 {
@@ -30,6 +31,7 @@ int main()
     runBinaryTreeTests(t);
     runHeapTests(t);
     runLevelBTests(t);
+    runSaveTests(t);
 
     t.line("");
     t.line("==== Summary: " + TextUtil::intToText(t.passed) + " passed, "

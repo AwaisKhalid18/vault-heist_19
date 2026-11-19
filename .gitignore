@@ -4,3 +4,6 @@ build/
 screenshots/*.png
 bench/results/*.csv
 *.zip
+
+vault_heist_test_save.txt
+vault_heist_save.txt
