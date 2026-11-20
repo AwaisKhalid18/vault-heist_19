@@ -1,7 +1,7 @@
 # Design decisions
 
 Places where the spec allowed more than one reading, and what we chose.
-(Spec rule 12 in CLAUDE.md: pick the simplest sensible interpretation and
+(Project rule: pick the simplest sensible interpretation and
 write it down here.)
 
 ## Alarm counts rooms, not individual comparisons
