@@ -53,7 +53,7 @@ void SandboxScreen::onEnter()
     comingSoonText.setFont(app.uiFont);
     comingSoonText.setCharacterSize(Theme::headingSize());
     comingSoonText.setFillColor(Theme::dimText());
-    comingSoonText.setString("Coming soon: Partner B is building this wing.  // TODO(B)");
+    comingSoonText.setString("Binary Tree and Max Heap have their own sandbox: open Sandbox from the main menu.");
     sizeLabel.setFont(app.uiFont);
     sizeLabel.setCharacterSize(Theme::smallSize());
     sizeLabel.setFillColor(Theme::dimText());

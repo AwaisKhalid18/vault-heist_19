@@ -7,7 +7,10 @@
 #   ./build.ps1 clean    delete the build folder
 param([string]$Task = "build")
 
-$ErrorActionPreference = "Stop"
+# "Continue", not "Stop": VsDevCmd and SFML's own CMake files write harmless
+# warnings to stderr, and with "Stop" PowerShell treats those as fatal errors.
+# Every step below checks $LASTEXITCODE explicitly instead.
+$ErrorActionPreference = "Continue"
 Push-Location $PSScriptRoot
 try {
     if ($Task -eq "clean") {
@@ -35,7 +38,9 @@ try {
     switch ($Task) {
         "run"   { & .\build\vault_heist.exe }
         "dev"   { & .\build\dev_a.exe }
-        "test"  { & .\build\run_tests.exe | Tee-Object -FilePath docs\test_output_A.txt; exit $LASTEXITCODE }
+        # run_tests writes docs\test_output_A.txt itself, so piping into the
+        # same file here would just fight it for the file handle.
+        "test"  { & .\build\run_tests.exe; exit $LASTEXITCODE }
         "bench" { & .\build\run_bench.exe }
         default { Write-Host "Build OK. Executables are in .\build\" }
     }

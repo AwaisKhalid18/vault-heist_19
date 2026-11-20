@@ -1,0 +1,9 @@
+{ "id": "4.3", "act": 4, "title": "Extract the Greatest Treasure", "mission": "Remove the highest-value treasures",
+  "concept": "Extract-max; root/last swap; reduce heap size; heapify",
+  "briefing": "The mechanism is awake and it will hand you its treasures one at a time, largest first. A Max Heap always keeps its maximum at the root, index 0, so there is nothing to search for. Taking it swaps the root with the last active chamber, shrinks the active heap by one and sifts the new root back down. The treasure you took stays in the array, just outside the heap, in the sorted region.",
+  "type": "heap_extract", "seed": 4303,
+  "generator": "heap", "n": 12, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 5, "lo": 0, "hi": 0,
+  "hints": ["Never go hunting through the rooms. The maximum is always index 0 - the gold door with the diamond.",
+            "Watch the yellow bracket in the array: it marks where the active heap ends and the sorted region begins.",
+            "After each extraction the new root is whatever was at the end, so it almost always has to sift back down."] }

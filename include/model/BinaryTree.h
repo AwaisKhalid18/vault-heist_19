@@ -1,7 +1,8 @@
 #pragma once
 
-// TODO(B): Partner B implements this whole class (Act 1).
-// Partner A only provides this compiling stub so the project links.
+// Act 1: a general binary tree. Its values carry no ordering at all - the
+// shape is the whole lesson - so a tree is built from a pair of traversals
+// rather than by inserting keys.
 
 #include "model/TreeNode.h"
 #include "core/EventLog.h"

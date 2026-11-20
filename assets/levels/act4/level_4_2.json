@@ -1,0 +1,9 @@
+{ "id": "4.2", "act": 4, "title": "Repair the Security Locks", "mission": "Restore the Max Heap property",
+  "concept": "Heapify; sift-up and sift-down",
+  "briefing": "Someone has been here before you. The mechanism was a valid Max Heap, but a few locks have been knocked out of place and the vault has sealed itself. Find every chamber that a lower chamber now beats and put the pair back the right way round. Fewer swaps means less alarm, so repair the damage rather than rebuilding the whole vault.",
+  "type": "heap_repair", "seed": 4202,
+  "generator": "disturbed", "n": 12, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Only a handful of rooms are wrong. The ! marks every parent one of its children beats.",
+            "Sift Down here pushes one value down until both children are smaller. Sift Up here pulls one value up while it beats its parent.",
+            "Heapify all repairs the whole vault at once, but it is charged for every swap it makes."] }

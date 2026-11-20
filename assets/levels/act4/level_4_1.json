@@ -1,0 +1,9 @@
+{ "id": "4.1", "act": 4, "title": "Activate the Vault", "mission": "Organise the treasure into a Max Heap",
+  "concept": "Complete binary tree; Max Heap property; bottom-up heap construction",
+  "briefing": "The final vault answers to priority, not to order. Its treasures sit in the chambers at random and the mechanism stays dead until every chamber holds at least as much as the two below it. Click a room and then its parent or one of its children to swap them. The array under the vault is the same data seen from the side: index i has its children at 2i+1 and 2i+2.",
+  "type": "heap_build", "seed": 4101,
+  "generator": "random", "n": 10, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Work upward from the last parent, index n/2 - 1. Everything below it is a leaf and already a heap of one.",
+            "A room marked with ! is beaten by one of its children. Swap it with the LARGER child, or the other child will break the rule next.",
+            "Sift Down here does the whole chain of swaps for one room, and costs exactly what those swaps would have cost."] }

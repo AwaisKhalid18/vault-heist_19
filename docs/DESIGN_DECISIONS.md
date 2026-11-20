@@ -1,7 +1,7 @@
 # Design decisions
 
 Places where the spec allowed more than one reading, and what we chose.
-(Spec rule 12 in CLAUDE.md: pick the simplest sensible interpretation and
+(Project rule: pick the simplest sensible interpretation and
 write it down here.)
 
 ## Alarm counts rooms, not individual comparisons
@@ -75,3 +75,69 @@ level is identical and gradable.
 `levels.txt` currently lists the ten Act 2-3 levels; Partner B appends
 Act 1 and Act 4 lines (the loader skips `#` comments, so the acts are
 already marked).
+
+---
+
+# Partner B decisions (Acts 1 and 4, shell, save)
+
+## Endless mode runs on the heap, not the AVL
+Spec 3.3 lists Endless under Act 3 as "mixed inserts and deletes, score
+is survival time while the tree stays valid, difficulty ramps up the
+operation rate", but the ownership table gives Endless to Partner B,
+whose structures are `BinaryTree` and `MaxHeap`. It is therefore built
+on the Heap Fortress and keeps every property the spec names: treasures
+arrive (inserts) and the player removes maxima (removals), the score is
+survival time, `HeapValidator` runs after every single operation and
+ends the run if it ever fails, and the delivery interval shortens as the
+run goes on. Only the structure differs.
+
+## Act 1 tree shapes
+Act 1 trees carry no ordering, so a shape cannot come from inserting
+keys. `LevelBuilderB` treats the value list as an inorder walk and picks
+a random root inside each range to produce a matching preorder, then
+hands both to `BinaryTree::buildPreIn`. Values are kept distinct,
+because only then does a pair of traversals describe exactly one tree -
+which is what level 1.2 depends on.
+
+## Diameter is counted in rooms
+`BinaryTree::diameter()` returns the number of NODES on the longest path,
+not the number of edges, to match the leaf-height-is-1 convention used
+everywhere else. A single room therefore has diameter 1.
+
+## Act 4 shares screens between level pairs
+4.1 and 4.2 use one screen, and 4.3 and 4.4 use another, because the
+player's move is identical within each pair. Only the starting array and
+the alarm budget differ, and both come from the level JSON. Adding a
+second class would have duplicated the interaction code with nothing to
+show for it.
+
+## Sift and heapify buttons are charged per swap
+The Act 4 operation buttons are shortcuts for a chain of player swaps, so
+each is charged exactly the alarm those swaps would have cost - measured
+by reading `MaxHeap::getSwaps()` before and after. Pressing "Heapify all"
+is therefore never cheaper than doing the work by hand, and never a way
+to dodge the alarm meter.
+
+## Undo for a heap is a snapshot
+Spec 4.4 offers inverse events or snapshots and says to do snapshots
+first. Act 4 saves the array plus the active heap size before each player
+action and restores with `MaxHeap::load`, which is the same mechanism the
+save file uses.
+
+## Tree save files assume distinct values
+`SaveManager::deserialiseTree` recovers the preorder and inorder lists
+from the "preorder with # markers" format and rebuilds through
+`BinaryTree::buildPreIn`, so the data structure does the reconstruction
+rather than the save code. That only has one answer when the values are
+distinct, which Act 1 guarantees.
+
+## App gained a deferred stack change
+A screen that pops or replaces itself from inside its own event handler
+would be deleted while that handler was still running. `App` now parks
+the request and `run()` applies it between frames. `App::levelFinished`
+uses it to swap the level for the Result screen.
+
+## Both partners' tests run from one binary
+`tests/main.cpp` calls Partner A's six suites and Partner B's three. One
+Partner A assertion hard-coded "10 campaign level files"; it now counts
+the Act 2-3 entries instead, since the list holds all twenty.

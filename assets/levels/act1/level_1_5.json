@@ -1,0 +1,9 @@
+{ "id": "1.5", "act": 1, "title": "Mirror the Vault", "mission": "Turn the vault into its own reflection",
+  "concept": "Tree inversion by recursion",
+  "briefing": "The last trick of the blueprint wing: the guards' map is the mirror image of the real vault, and you need the real one. Clicking a room swaps its two corridors. Swap every room and the whole vault flips - which is all that mirror() does, one room at a time, all the way down. Auto will run the recursion for you, but it charges for every room it turns.",
+  "type": "bt_mirror", "seed": 1505,
+  "generator": "random", "n": 9, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Swapping a room's children does not change that room's height or how many rooms sit under it - only which side they are on.",
+            "A dead end has nothing to swap. Only rooms with at least one corridor below them count.",
+            "Mirroring reverses the inorder route. Mirror twice and you are exactly back where you started."] }

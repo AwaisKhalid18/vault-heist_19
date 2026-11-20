@@ -1,6 +1,7 @@
 #include "gui/App.h"
 #include "gui/Theme.h"
 #include "core/TextUtil.h"
+#include "screens/ResultScreen.h"
 #include <iostream>
 
 App::App()
@@ -9,6 +10,10 @@ App::App()
     debugValidate = false;
     wantQuit = false;
     screenshotCounter = 0;
+    pendingAction = PENDING_NONE;
+    pendingScreen = nullptr;
+    pendingDepth = 0;
+    savePath = "vault_heist_save.txt";
 }
 
 App::~App()
@@ -18,6 +23,7 @@ App::~App()
         screenCount--;
         delete screens[screenCount];
     }
+    delete pendingScreen;      // a change requested but never applied
 }
 
 bool App::init(const string& windowTitle)
@@ -111,16 +117,63 @@ void App::useUiView()
     window.setView(sf::View(sf::FloatRect(0.f, 0.f, (float)size.x, (float)size.y)));
 }
 
+void App::requestPop()
+{
+    pendingAction = PENDING_POP;
+}
+
+void App::requestReplaceTop(Screen* screen)
+{
+    if (pendingScreen != nullptr)
+    {
+        delete pendingScreen;      // a second request in one frame wins
+    }
+    pendingAction = PENDING_REPLACE;
+    pendingScreen = screen;
+}
+
+void App::requestPopToDepth(int depth)
+{
+    pendingAction = PENDING_POP_TO;
+    pendingDepth = depth;
+}
+
+void App::applyPendingChange()
+{
+    int action = pendingAction;
+    pendingAction = PENDING_NONE;
+    if (action == PENDING_POP)
+    {
+        pop();
+    }
+    else if (action == PENDING_REPLACE)
+    {
+        Screen* screen = pendingScreen;
+        pendingScreen = nullptr;
+        replaceTop(screen);
+    }
+    else if (action == PENDING_POP_TO)
+    {
+        while (screenCount > pendingDepth && screenCount > 0)
+        {
+            pop();
+        }
+    }
+}
+
+// Records the result, writes the save file and opens the Result screen in
+// place of the level. The change is requested rather than done here, because
+// this is called from inside the level screen's own event handling.
 void App::levelFinished(const string& levelId, const LevelOutcome& o)
 {
-    // TODO(B): push the Result screen here instead of printing
-    cout << "Level " << levelId << " finished: "
-         << (o.completed ? "completed" : "failed")
-         << ", steps " << o.alarmSteps << "/" << o.capacity
-         << ", optimal " << o.optimalSteps
-         << ", stars " << ScoreSystem::computeStars(o)
-         << ", score " << ScoreSystem::computeScore(o) << endl;
-    pop();
+    int stars = ScoreSystem::computeStars(o);
+    int score = ScoreSystem::computeScore(o);
+    if (o.completed)
+    {
+        save.recordLevel(levelId, stars, score);
+        save.save(savePath);
+    }
+    requestReplaceTop(new ResultScreen(*this, levelId, o));
 }
 
 void App::saveScreenshot()
@@ -169,6 +222,13 @@ void App::run()
             {
                 screens[screenCount - 1]->handleEvent(e);
             }
+            // a screen that asked to be replaced or popped is still running
+            // its handler above, so the change is applied only now
+            applyPendingChange();
+            if (screenCount == 0)
+            {
+                break;
+            }
         }
         if (!window.isOpen() || wantQuit || screenCount == 0)
         {
@@ -181,6 +241,7 @@ void App::run()
             dt = 0.1f;   // avoid huge jumps after a stall
         }
         screens[screenCount - 1]->update(dt);
+        applyPendingChange();
         if (!window.isOpen() || wantQuit || screenCount == 0)
         {
             break;

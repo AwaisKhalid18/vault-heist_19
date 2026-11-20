@@ -30,6 +30,9 @@ file(GLOB MODEL_SOURCES CONFIGURE_DEPENDS
     src/model/*.cpp
     src/game/LevelLoader.cpp
     src/game/LevelTreeBuilder.cpp
+    src/game/LevelBuilderB.cpp
+    src/game/SaveManager.cpp
+    src/game/Campaign.cpp
     src/game/ScoreSystem.cpp
 )
 add_library(vh_model STATIC ${MODEL_SOURCES})

@@ -1,10 +1,15 @@
 #pragma once
 
-// TODO(B): Partner B implements the Max Heap and Heap Sort (Act 4).
-// Partner A only provides this compiling stub so the project links.
-
+#include <string>
 #include "core/EventLog.h"
 
+using namespace std;
+
+// Array-based Max Heap and Heap Sort (Act 4).
+//
+// `count` is how many values are stored and `heapSize` is how much of that
+// array is still the active heap. Heap Sort shrinks heapSize while count
+// stays put, so indices heapSize .. count - 1 are the sorted region.
 class MaxHeap
 {
 public:
@@ -39,4 +44,9 @@ private:
     EventLog* log;
     long long comparisons;
     long long swaps;
+
+    void growTo(int needed);                            // doubling growth
+    void swapCells(int i, int j, const string& reason); // swap + count + HEAP_SWAP event
+    void logSizeChange(int oldHeapSize, int newHeapSize);
+    void logDone(const string& text);                   // the DONE event ending a batch
 };

@@ -1,4 +1,4 @@
-==== Vault Heist - Partner A test suite ====
+==== Vault Heist - Partner A + Partner B test suite ====
 
 -- Core --
 [PASS] NodeStack grows to 200 entries
@@ -185,4 +185,205 @@
 [PASS] 3.5 the descent is at most the tree height
 [PASS] 3.5 perfect descent fits in the capacity
 
-==== Summary: 173 passed, 0 failed ====
+-- BinaryTree (Act 1) --
+[PASS] preorderRec matches the hand-worked example (1 2 4 5 3 6 7)
+[PASS] preorderIter equals preorderRec
+[PASS] inorderRec matches the hand-worked example (4 2 5 1 3 7 6)
+[PASS] inorderIter equals inorderRec
+[PASS] postorderRec matches the hand-worked example (4 5 2 7 6 3 1)
+[PASS] postorderIter equals postorderRec
+[PASS] levelOrder matches the hand-worked example (1 2 3 4 5 6 7)
+[PASS] empty tree: preorderRec writes nothing
+[PASS] empty tree: preorderIter writes nothing
+[PASS] empty tree: inorderIter writes nothing
+[PASS] empty tree: postorderIter writes nothing
+[PASS] empty tree: levelOrder writes nothing
+[PASS] empty tree has height 0
+[PASS] empty tree has diameter 0
+[PASS] empty tree counts as symmetric
+[PASS] empty tree has no root
+[PASS] single node has height 1 (leaf height = 1)
+[PASS] single node has diameter 1
+[PASS] single node: one id in preorder
+[PASS] single node is symmetric
+[PASS] left chain of 5 has height 5
+[PASS] left chain of 5 has diameter 5
+[PASS] preorderRec stops at maxCount
+[PASS] preorderIter stops at maxCount
+[PASS] inorderIter stops at maxCount
+[PASS] levelOrder stops at maxCount
+[PASS] postorder + inorder rebuilds the same tree
+[PASS] preorder + inorder round trip is stable
+[PASS] round trip keeps the height
+[PASS] building from 0 rooms leaves an empty tree
+[PASS] rebuilding replaces the previous tree
+[PASS] example tree has height 4 (1 -> 3 -> 6 -> 7)
+[PASS] example tree has diameter 6 rooms
+[PASS] level order returns every room
+[PASS] LCA of rooms 4 and 5 is room 2
+[PASS] LCA of rooms 4 and 7 is the root
+[PASS] LCA of a room and its own child is that room
+[PASS] LCA reports false when a room is missing
+[PASS] LCA reports false when both rooms are missing
+[PASS] path to room 7 is 4 rooms long and starts at the root
+[PASS] path to the root is just the root
+[PASS] path to a missing room is empty
+[PASS] two identical builds compare as the same tree
+[PASS] the example tree is not symmetric
+[PASS] mirroring changes the tree
+[PASS] mirroring reverses the inorder traversal
+[PASS] mirroring twice returns to the original
+[PASS] mirroring keeps the height
+[PASS] a mirror-image tree reports itself symmetric
+[PASS] 300 random shapes: recursive and iterative traversals always agree
+[PASS] 300 random shapes: every room has a valid root path
+[PASS] 300 random shapes: height <= diameter <= room count
+[PASS] 300 random shapes: mirroring twice is the identity
+
+-- MaxHeap and Heap Sort (Act 4) --
+[PASS] root's children are at index 1 and 2
+[PASS] index 3 has children 7 and 8
+[PASS] index 1 and 2 share parent 0
+[PASS] index 7 and 8 share parent 3
+[PASS] parentOf undoes leftOf and rightOf
+[PASS] building from an empty array
+[PASS] an empty heap satisfies the heap property
+[PASS] validator accepts the empty heap
+[PASS] building from one element
+[PASS] a single element is a valid Max Heap
+[PASS] the largest value ends up at the root
+[PASS] random input builds a valid Max Heap
+[PASS] build keeps all nine values active
+[PASS] an already-sorted descending array is already a heap
+[PASS] building an already-valid heap needs no swaps
+[PASS] reverse-sorted input still lifts the maximum to the root
+[PASS] reverse-sorted input builds a valid Max Heap
+[PASS] an all-duplicates array is a valid Max Heap
+[PASS] negative values heap correctly
+[PASS] the disturbed array is not a Max Heap yet
+[PASS] siftDown at the root repairs the heap
+[PASS] siftDown lifts the larger child to the root
+[PASS] heapify repairs a scrambled array
+[PASS] heapify brings the maximum to the root
+[PASS] a new maximum sifts all the way up to the root
+[PASS] insert grows both counts
+[PASS] the heap is still valid after an insert
+[PASS] a small insert does not disturb the root
+[PASS] the array grows past its first capacity
+[PASS] 400 inserts leave a valid Max Heap
+[PASS] extracting from an empty heap reports false
+[PASS] extractMax always returns the current root
+[PASS] the remaining heap stays valid after every extraction
+[PASS] successive extractions come out in descending order
+[PASS] the active heap is empty once everything is extracted
+[PASS] the extracted values stay in the array as the sorted region
+[PASS] repeated extraction leaves the array sorted ascending
+[PASS] extracting past the end reports false
+[PASS] swapping a parent with its child is allowed
+[PASS] the swap really exchanged the two cells
+[PASS] the swap works in either argument order
+[PASS] swapping back restores the original
+[PASS] swapping two siblings is rejected
+[PASS] swapping a room with its grandchild is rejected
+[PASS] swapping a cell with itself is rejected
+[PASS] a negative index is rejected
+[PASS] an index past the heap is rejected
+[PASS] a cell outside the active heap cannot be swapped
+[PASS] heapSort on an empty array does nothing and does not crash
+[PASS] heapSort of a single element
+[PASS] heapSort matches the reference on random input
+[PASS] heapSort handles already-sorted input
+[PASS] heapSort handles reverse-sorted input
+[PASS] heapSort handles duplicate-heavy input
+[PASS] heapSort handles negative values
+[PASS] heapSort leaves the live heap untouched
+[PASS] heapSort leaves the live active heap size untouched
+[PASS] 200 random arrays: heapSort always matches the reference sort
+[PASS] building a heap counts comparisons
+[PASS] building this heap needs swaps
+[PASS] resetCounters clears both counters
+[PASS] both construction routes give a heap
+[PASS] bottom-up construction swaps fewer times than repeated insertion (59 vs 264)
+[PASS] extraction shrank the active heap
+[PASS] load restores the exact saved state
+[PASS] load clamps an oversized active heap size
+[PASS] load clamps a negative active heap size
+[PASS] validator accepts a correct Max Heap
+[PASS] a passing check leaves the error message empty
+[PASS] validator rejects a child above its parent
+[PASS] a failing check explains itself: index 4 (95) > parent index 1 (70)
+[PASS] values outside the active heap are not part of the heap property
+[PASS] validator rejects an unsorted sorted region
+[PASS] 10,000 random heap operations: the validator passed after every step
+[PASS] 10,000 random heap operations: isMaxHeap held after every step
+[PASS] the random run exercised both inserts and extractions (3360 inserts, 3330 extractions)
+
+-- Levels (Acts 1 and 4) --
+[PASS] every Partner B level file loads with id, type, briefing and hints
+[PASS] the campaign lists all 5 Act 1 levels (found 5)
+[PASS] the campaign lists all 5 Act 4 levels (found 5)
+[PASS] all 5 Act 1 levels build a tree of the size their file asks for
+[PASS] every Act 1 tree has between 6 and 15 rooms, as the spec requires
+[PASS] every Act 1 level's preorder + inorder rebuilds its own tree
+[PASS] every Act 1 level's alarm capacity exceeds its optimal path
+[PASS] the same seed rebuilds exactly the same Act 1 vault
+[PASS] Act 1 room values are distinct, so the rebuild is unique
+[PASS] all 5 Act 4 level files load and build an array of the right size
+[PASS] every Act 4 level can be finished inside its own alarm capacity
+[PASS] every Act 4 level leaves a valid heap after a perfect play
+[PASS] the "heap" generator produces a valid Max Heap
+[PASS] the "disturbed" generator really does break the heap
+[PASS] a disturbed vault can always be repaired
+[PASS] descending input is already a valid Max Heap
+[PASS] the "sorted" generator produces ascending input
+[PASS] the same seed rebuilds exactly the same Act 4 vault
+
+-- SaveManager --
+[PASS] a fresh save has no stars
+[PASS] an unplayed level has no stars
+[PASS] an unplayed level is not cleared
+[PASS] a finished level records its stars and score
+[PASS] a level with stars counts as cleared
+[PASS] a worse replay does not lower the recorded best
+[PASS] a better replay raises the recorded best
+[PASS] total stars adds every level up
+[PASS] clear() wipes the progress
+[PASS] the leaderboard starts empty
+[PASS] three runs are recorded
+[PASS] the leaderboard is sorted highest first
+[PASS] the lowest run sits last
+[PASS] the leaderboard never grows past its limit
+[PASS] the leaderboard stays sorted after many entries
+[PASS] the best run of all is still on top
+[PASS] a run too slow for the table is dropped
+[PASS] the save file is written
+[PASS] the save file is read back
+[PASS] level progress survives a save and load
+[PASS] every level's stars survive
+[PASS] the leaderboard survives
+[PASS] the animation speed setting survives
+[PASS] the validator setting survives
+[PASS] the tooltip setting survives
+[PASS] the endless seed survives
+[PASS] loading a missing save file fails cleanly instead of crashing
+[PASS] a failed load leaves an empty save
+[PASS] a tree serialises as preorder with null markers (50 30 # # 70 60 # # #)
+[PASS] that text loads back
+[PASS] the reloaded tree is identical
+[PASS] an empty tree serialises as a single marker
+[PASS] a single room serialises with both children missing
+[PASS] a truncated save string is rejected
+[PASS] a save string with rubbish in it is rejected
+[PASS] a save string with trailing rubbish is rejected
+[PASS] 200 random vaults survive a save and load unchanged
+[PASS] a heap serialises as its array plus the active size (90 70 80 10 20 30 | 6)
+[PASS] that text loads back
+[PASS] the reloaded heap matches value for value
+[PASS] the reloaded heap is still a valid Max Heap
+[PASS] a half-sorted heap loads back
+[PASS] the active heap size and the sorted region both survive
+[PASS] the resumed active heap is still valid
+[PASS] an empty heap round trips
+[PASS] a heap save string with rubbish in it is rejected
+
+==== Summary: 366 passed, 0 failed ====

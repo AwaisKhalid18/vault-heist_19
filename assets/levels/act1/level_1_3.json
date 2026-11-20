@@ -1,0 +1,9 @@
+{ "id": "1.3", "act": 1, "title": "The Alarm Spreads Upward", "mission": "Record every room's height, then the vault's diameter",
+  "concept": "Height via postorder, diameter",
+  "briefing": "The alarm does not start at the entrance. It starts at the dead ends and climbs. A dead end has height 1. Any other room is one floor taller than its taller side. You cannot answer for a room until both rooms below it are answered, which is exactly the order a postorder walk computes heights in. When every floor is mapped, report the diameter - the most rooms on any single path through the vault.",
+  "type": "bt_height", "seed": 1303,
+  "generator": "random", "n": 8, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Leaf height is 1, not 0. An empty corridor is 0, so a leaf is 1 + max(0, 0).",
+            "A room with one child of height 3 and one of height 1 has height 4 - the TALLER child plus one.",
+            "The diameter path bends at one room: left height + right height + 1. Check that sum at every room, not just the entrance."] }

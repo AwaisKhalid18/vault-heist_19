@@ -37,8 +37,8 @@ Partner A's work is merged into `main`.
 ## 2. THE HARD CONSTRAINTS — read twice, breaking these costs marks
 
 These come from the official course handout. They are not style
-preferences. `CLAUDE.md` in the repo root is the authoritative copy; this
-is a summary.
+preferences. The official course handout is the authoritative copy, and
+the Constraints section of README.md restates them; this is a summary.
 
 | Rule | Detail |
 |---|---|
@@ -119,7 +119,7 @@ does not compile or that fails tests. Partner A's suite is currently
 
 ## 4. The repo as it stands
 
-    CMakeLists.txt  build.ps1  CLAUDE.md  README.md  .gitignore
+    CMakeLists.txt  build.ps1  README.md  .gitignore
     apps/main.cpp        <-- YOURS (currently a stub that opens A's dev menu)
     apps/dev_a.cpp       <-- A's launcher, do not touch
     assets/fonts/        Cinzel.ttf, Inter.ttf, JetBrainsMono.ttf (+ OFL licences)
@@ -149,7 +149,7 @@ tell the user** — Partner A has to agree, or the merge breaks.
 ### Missing from the repo (tell the user, do not invent them)
 - `docs/Project_Deliverable_1.pdf` — the official spec. `docs/README_SPEC.md`
   is a placeholder. **If the user can give you the PDF, read it before
-  anything else; where it disagrees with `CLAUDE.md` or this file, the spec
+  anything else; where it disagrees with this file, the spec
   wins and you should say so out loud.**
 - `PROMPTS_PARTNER_B.md` — if the user has a phase-plan document for
   Partner B the way Partner A had one, ask for it; it overrides §9 below.

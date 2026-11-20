@@ -7,6 +7,10 @@ void runAVLTests(TestRunner& t);
 void runTreeValidatorTests(TestRunner& t);
 void runTreeEventTests(TestRunner& t);
 void runLevelTests(TestRunner& t);
+void runBinaryTreeTests(TestRunner& t);
+void runHeapTests(TestRunner& t);
+void runLevelBTests(TestRunner& t);
+void runSaveTests(TestRunner& t);
 
 int main()
 {
@@ -17,13 +21,17 @@ int main()
         t.setMirror(&mirror);
     }
 
-    t.line("==== Vault Heist - Partner A test suite ====");
+    t.line("==== Vault Heist - Partner A + Partner B test suite ====");
     runCoreTests(t);
     runBSTTests(t);
     runAVLTests(t);
     runTreeValidatorTests(t);
     runTreeEventTests(t);
     runLevelTests(t);
+    runBinaryTreeTests(t);
+    runHeapTests(t);
+    runLevelBTests(t);
+    runSaveTests(t);
 
     t.line("");
     t.line("==== Summary: " + TextUtil::intToText(t.passed) + " passed, "
