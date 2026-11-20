@@ -1,0 +1,9 @@
+{ "id": "3.3", "act": 3, "title": "Double Rotations", "mission": "Name the case, then rotate twice",
+  "concept": "LR and RL double rotations",
+  "briefing": "Some strain cannot be fixed with one rotation. When the heavy child leans the OTHER way you face an LR or RL case: first rotate at the child to straighten the path, then rotate at the strained room. Name the case before you touch anything - a wrong name jolts the alarm.",
+  "type": "avl_double_rot", "seed": 3303,
+  "generator": "explicit", "n": 6, "keyMin": 1, "keyMax": 110,
+  "keys": [50, 30, 70, 20, 40, 45, 90, 85, 10, 15, 100, 95],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Left-heavy room whose left child leans right = LR. Right-heavy room whose right child leans left = RL.",
+            "Step 1 rotates at the CHILD, step 2 rotates at the strained room itself."] }

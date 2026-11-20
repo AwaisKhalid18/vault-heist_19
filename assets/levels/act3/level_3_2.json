@@ -1,0 +1,9 @@
+{ "id": "3.2", "act": 3, "title": "Single Rotations", "mission": "Repair the vault with LL and RR rotations",
+  "concept": "LL and RR single rotations",
+  "briefing": "Time to repair the strain by hand. Drag a child room onto its parent to rotate: dragging a LEFT child up performs a right rotation (fixes LL), dragging a RIGHT child up performs a left rotation (fixes RR). Always repair the deepest strained room first. A wrong rotation jolts the alarm.",
+  "type": "avl_single_rot", "seed": 3202,
+  "generator": "explicit", "n": 7, "keyMin": 1, "keyMax": 110,
+  "keys": [50, 30, 70, 20, 60, 80, 10, 90, 100, 5, 1, 105, 110],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["A left-heavy room with a left-leaning child is an LL case: drag its LEFT child onto it.",
+            "The red badge and the ! mark show the room to repair."] }

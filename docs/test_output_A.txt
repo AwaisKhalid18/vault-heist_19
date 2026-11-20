@@ -1,0 +1,188 @@
+==== Vault Heist - Partner A test suite ====
+
+-- Core --
+[PASS] NodeStack grows to 200 entries
+[PASS] NodeStack pops everything back
+[PASS] NodeStack pop on empty returns nullptr
+[PASS] NodeQueue keeps FIFO order through growth
+[PASS] Random: same seed gives the same sequence
+[PASS] Random: nextInt stays inside [lo, hi]
+[PASS] Random: shuffle keeps every element
+[PASS] TextUtil: -407 to text
+[PASS] TextUtil: text to 1234
+[PASS] TextUtil: rejects broken numbers
+[PASS] alarmCapacity(4) = ceil(6)+2 = 8
+[PASS] alarmCapacity(5) = ceil(7.5)+2 = 10
+[PASS] 3 stars: steps == optimal, no penalties
+[PASS] 2 stars: steps <= 1.25x optimal, 1 penalty
+[PASS] 1 star: completed within capacity
+[PASS] 0 stars: alarm full
+[PASS] hint caps the stars at 2
+[PASS] score formula
+[PASS] score never goes below 0
+[PASS] LevelLoader: loads level_2_1.json
+[PASS] LevelLoader: id, act and type are right
+[PASS] LevelLoader: numbers are right
+[PASS] LevelLoader: hints array was read
+[PASS] LevelLoader: levels.txt lists at least 10 levels
+
+-- BST --
+[PASS] insert: size is 7
+[PASS] insert: height is 3 (leaf = 1)
+[PASS] search finds and misses correctly
+[PASS] valid after inserts: 
+[PASS] duplicate root key rejected
+[PASS] duplicate inner key rejected
+[PASS] size unchanged after duplicates
+[PASS] delete leaf 20
+[PASS] leaf really gone
+[PASS] valid after leaf delete: 
+[PASS] 40 has one child
+[PASS] delete node with one left child
+[PASS] child 35 took 40's place
+[PASS] valid after one-left-child delete: 
+[PASS] delete node with one right child
+[PASS] child 45 took 40's place
+[PASS] valid after one-right-child delete: 
+[PASS] 30 has two children
+[PASS] delete node with two children
+[PASS] successor kept, 30 gone
+[PASS] valid after two-children delete: 
+[PASS] delete the root
+[PASS] root gone, others stay
+[PASS] valid after root delete: 
+[PASS] deleting a missing key returns false
+[PASS] deleteCaseOf on missing key
+[PASS] findMin is 20
+[PASS] findMax is 80
+[PASS] min/max on empty tree fail
+[PASS] successor of 40 is 50
+[PASS] successor works for a missing key
+[PASS] 80 has no successor
+[PASS] predecessor of 50 is 40
+[PASS] 20 has no predecessor
+[PASS] range [30,70] holds 5 keys
+[PASS] range result is sorted and correct
+[PASS] empty range returns 0
+[PASS] range [75,85] visits at most 3 rooms (pruning works), visited 3
+[PASS] 1st smallest is 20
+[PASS] 4th smallest is 50
+[PASS] 7th smallest is 80
+[PASS] 8th smallest does not exist
+[PASS] LCA of 20 and 40 is 30
+[PASS] LCA of 40 and 60 is 50
+[PASS] LCA of 30 and its child 40 is 30
+[PASS] LCA with a missing key fails
+[PASS] path to the root is 1 room
+[PASS] path to 20 is 3 rooms
+[PASS] inorderKeys returns all keys sorted
+[PASS] 10,000 sorted inserts give height 10,000
+[PASS] search still works at depth 10,000
+[PASS] clear() empties the deep tree without crashing
+[PASS] copyFrom keeps node ids
+[PASS] copy is a valid BST: 
+[PASS] copyFrom keeps nextId (new nodes get the same id)
+
+-- AVL --
+[PASS] insert 30,20,10 triggers LL
+[PASS] LL: 20 became the root
+[PASS] LL: tree valid after repair: 
+[PASS] insert 10,20,30 triggers RR
+[PASS] RR: 20 became the root
+[PASS] RR: tree valid after repair: 
+[PASS] insert 30,10,20 triggers LR
+[PASS] LR: 20 became the root
+[PASS] LR: tree valid after repair: 
+[PASS] insert 10,30,20 triggers RL
+[PASS] RL: 20 became the root
+[PASS] RL: tree valid after repair: 
+[PASS] delete 70 from the BF-0 example
+[PASS] deletion with BF 0 on the heavy child uses a single rotation
+[PASS] valid after that deletion: 
+[PASS] delete 30 forcing an RL repair
+[PASS] valid after RL deletion repair: 
+[PASS] caseAt sees the LL violation
+[PASS] predictInsert foresees LL
+[PASS] predictInsert foresees LR
+[PASS] predictInsert foresees no rotation
+[PASS] predictInsert changed nothing
+[PASS] tree untouched by predictions: 
+[PASS] manual mode: tree is unbalanced before repair
+[PASS] manual rotateRightAt works
+[PASS] manual rotation fixed the balance
+[PASS] still a valid BST: 
+[PASS] rotateLeftAt without a right child is refused
+[PASS] rotateLeftAt lifted 70 to the root
+[PASS] rotateRightAt restored 50
+[PASS] rotations never change the inorder sequence
+[PASS] 2,000-op run: validator passed after every operation
+[PASS] 2,000-op run: size always matched the reference
+[PASS] 2,000-op run: kth always matched the sorted array
+[PASS] 2,000-op run: rank always matched the sorted array
+[PASS] countInRange(100,300) matches
+[PASS] 10,000-op stress run stayed valid: 
+[PASS] stress tree height is O(log n): height 13 for n 1377
+
+-- TreeValidator --
+[PASS] healthy structure passes
+[PASS] healthy BST passes
+[PASS] healthy AVL passes
+[PASS] wrong order is caught: 
+[PASS] wrong height is caught: ordering broken: 50 after 90
+[PASS] wrong size is caught: stored height of 50 is 9, expected 2
+[PASS] bad parent pointer is caught: stored size of 50 is 7, expected 2
+[PASS] cycle is caught: bad parent pointer at left child of 50
+[PASS] a chain is still a valid BST
+[PASS] the AVL check flags it: bad parent pointer at left child of 30
+
+-- Events --
+[PASS] search 40 writes 3 VISIT and 3 COMPARE events
+[PASS] COMPARE events equal the comparison counter
+[PASS] the batch ends with DONE
+[PASS] COMPARE events carry the chosen side
+[PASS] nullptr log: no events written
+[PASS] INSERT event carries a snapshot
+[PASS] the INSERT snapshot matches the real tree
+[PASS] RR insert writes a ROTATE event
+[PASS] the ROTATE event says RR via a left rotation
+[PASS] the ROTATE snapshot matches the real tree
+[PASS] BALANCE_ALERT comes before the ROTATE
+[PASS] two-children delete: SWAP_VALUE then UNLINK
+[PASS] the UNLINK snapshot matches the real tree
+[PASS] saveArray / getArray round trip
+
+-- Levels (Acts 2-3) --
+[PASS] all 10 Act 2-3 level files load with id and type
+[PASS] 2.1 builds a 12-room vault
+[PASS] 2.1 tree is a valid BST: 
+[PASS] 2.1 target lies at least 3 rooms deep
+[PASS] 2.1 perfect play wins: optimal 7 < capacity 13
+[PASS] 2.1 full alarm means 0 stars (retry)
+[PASS] 2.2 scripted insert 48 works
+[PASS] 2.2 scripted insert 15 works
+[PASS] 2.2 scripted insert 85 works
+[PASS] 2.2 perfect play fits in the alarm capacity
+[PASS] 2.2 tree stays valid: 
+[PASS] 2.3 offers a leaf deletion
+[PASS] 2.3 offers a one-child deletion
+[PASS] 2.3 offers a two-children deletion
+[PASS] 2.3 perfect deletions fit in the capacity
+[PASS] 2.4 range holds at least 3 treasures, holds 5
+[PASS] 2.4 pruned query skips part of the vault (7 of 14 rooms)
+[PASS] 2.4 collecting the range fits inside the optimal walk
+[PASS] 2.5 sorted inserts degenerate into a corridor of height n
+[PASS] 2.5 is winnable despite the shrinking capacity
+[PASS] 3.1 has exactly 2 unbalanced rooms, found 2
+[PASS] 3.2 shows LL at least twice (2)
+[PASS] 3.2 shows RR at least twice (3)
+[PASS] 3.2 fully repaired in the end: 
+[PASS] 3.3 shows LR at least twice (2)
+[PASS] 3.3 shows RL at least twice (2)
+[PASS] 3.4 script contains LL, RR, LR and RL predictions
+[PASS] Act 3 overall: every rotation type appears at least twice
+[PASS] 3.5 tree is a valid AVL: 
+[PASS] 3.5 the target treasure exists
+[PASS] 3.5 the descent is at most the tree height
+[PASS] 3.5 perfect descent fits in the capacity
+
+==== Summary: 173 passed, 0 failed ====

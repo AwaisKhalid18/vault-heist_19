@@ -1,0 +1,9 @@
+{ "id": "3.4", "act": 3, "title": "Auto Mode and Prediction", "mission": "Predict each repair before it happens",
+  "concept": "AVL insert with rebalancing",
+  "briefing": "The vault has learned to repair itself. Before each delivery arrives, predict which repair the insert will trigger: None, LL, RR, LR or RL. Then watch the vault twist itself back into shape. A wrong prediction jolts the alarm.",
+  "type": "avl_predict", "seed": 3404,
+  "generator": "explicit", "n": 3, "keyMin": 1, "keyMax": 60,
+  "keys": [20, 10, 30, 40, 50, 25, 5, 3, 8],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Imagine the insert path, then find the first room whose balance factor would reach 2 or -2.",
+            "Heavy child leaning the same way: single rotation. Leaning the other way: double rotation."] }

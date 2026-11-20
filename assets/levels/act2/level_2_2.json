@@ -1,0 +1,8 @@
+{ "id": "2.2", "act": 2, "title": "Stash Loot", "mission": "Walk each new treasure to its hiding spot",
+  "concept": "BST insert",
+  "briefing": "You carry stolen treasures that must be stashed inside the sorted vault. Walk the exact insert path: compare at every room, choose a corridor, and the new room is built at the first empty spot. Three treasures await.",
+  "type": "bst_insert", "seed": 2202,
+  "generator": "random", "n": 10, "keyMin": 10, "keyMax": 99, "keys": [],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Follow the same left/right rule as a search; the new room grows at the empty spot you reach.",
+            "A glowing ghost door appears when the next step is the empty spot - click it."] }

@@ -1,0 +1,9 @@
+{ "id": "2.3", "act": 2, "title": "Steal and Collapse", "mission": "Collapse rooms without breaking the vault",
+  "concept": "BST delete: leaf, one child, two children",
+  "briefing": "Stealing a treasure collapses its room. A leaf room simply vanishes; a room with one corridor lets its child take over; a room with two corridors swaps its treasure with its inorder successor first. Name the case before each theft.",
+  "type": "bst_delete", "seed": 2303,
+  "generator": "explicit", "n": 0, "keyMin": 10, "keyMax": 99,
+  "keys": [50, 30, 70, 20, 40, 60, 80, 10, 45, 75],
+  "k": 0, "lo": 0, "hi": 0,
+  "hints": ["Count the room's corridors going down: none = leaf, one = one child, two = two children.",
+            "The inorder successor is the smallest key in the right subtree - watch the value swap."] }
