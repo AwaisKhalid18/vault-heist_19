@@ -6,6 +6,9 @@ Dialog::Dialog()
     buttonCount = 0;
     openFlag = false;
     fade = 0.f;
+    heraldX = 0.f;
+    heraldY = 0.f;
+    heraldSide = 0.f;
     titleFontPtr = nullptr;
     textFontPtr = nullptr;
 }
@@ -105,14 +108,19 @@ bool Dialog::isOpen()
 
 void Dialog::layout(float windowW, float windowH)
 {
+    // the herald sits in a column of its own on the left
+    const float HERALD_SIDE = 108.f;
+    const float HERALD_GAP = 20.f;
+    float heraldColumn = HERALD_SIDE + HERALD_GAP;
+
     // the panel has to be wide enough to hold its row of buttons
     float buttonW = 150.f;
     float buttonGap = 14.f;
     float buttonsW = (float)buttonCount * buttonW + (float)(buttonCount - 1) * buttonGap;
-    float w = 640.f;
-    if (buttonsW + 64.f > w)
+    float w = 640.f + heraldColumn;
+    if (buttonsW + 64.f + heraldColumn > w)
     {
-        w = buttonsW + 64.f;
+        w = buttonsW + 64.f + heraldColumn;
     }
     title.setString(pendingTitle);
     body.setString(wrap(pendingBody, 64));
@@ -144,10 +152,17 @@ void Dialog::layout(float windowW, float windowH)
     panel.setRect(x, y, w, h, Theme::panelRadius());
     panel.setFillColor(sf::Color(18, 24, 37, 224));
     panel.setOutline(Theme::gold(), 1.f);
-    title.setPosition(x + 32.f, y + 24.f);
-    body.setPosition(x + 32.f, y + 86.f);
 
-    float bx = x + (w - buttonsW) / 2.f;
+    // the herald keeps the left column; the text starts after it
+    heraldSide = HERALD_SIDE;
+    heraldX = x + 26.f;
+    heraldY = y + 30.f;
+    float textX = x + 26.f + heraldColumn;
+
+    title.setPosition(textX, y + 24.f);
+    body.setPosition(textX, y + 86.f);
+
+    float bx = x + heraldColumn + (w - heraldColumn - buttonsW) / 2.f;
     float by = y + h - 58.f;
     for (int i = 0; i < buttonCount; i++)
     {
@@ -209,6 +224,7 @@ void Dialog::draw(sf::RenderWindow& window)
     window.draw(dimmer);
 
     panel.drawWithShadow(window);
+    herald.draw(window, heraldX, heraldY, heraldSide, heraldSide + 20.f, textFontPtr);
     window.draw(title);
     window.draw(body);
     for (int i = 0; i < buttonCount; i++)

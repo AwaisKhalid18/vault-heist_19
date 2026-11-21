@@ -8,29 +8,40 @@ class Theme
 {
 public:
     // ---- palette ----
-    static sf::Color background() { return sf::Color(11, 15, 23); }
-    static sf::Color gridLine() { return sf::Color(42, 52, 72, 40); }
-    static sf::Color panel() { return sf::Color(21, 28, 42, 235); }
-    static sf::Color panelLight() { return sf::Color(30, 39, 58, 235); }
-    static sf::Color panelBorder() { return sf::Color(42, 52, 72); }
-    static sf::Color text() { return sf::Color(230, 233, 239); }
-    static sf::Color dimText() { return sf::Color(138, 147, 166); }
-    static sf::Color balanced() { return sf::Color(63, 185, 122); }
-    static sf::Color warning() { return sf::Color(234, 217, 76); }
-    static sf::Color violation() { return sf::Color(229, 72, 77); }
-    static sf::Color currentVisit() { return sf::Color(76, 154, 255); }
-    static sf::Color skipped() { return sf::Color(74, 82, 99); }
-    static sf::Color gold() { return sf::Color(212, 165, 55); }
-    static sf::Color alarmLow() { return sf::Color(212, 165, 55); }
-    static sf::Color alarmHigh() { return sf::Color(229, 72, 77); }
+    // Castle-at-night look: cold iron and near-black stone lit by torchlight.
+    // Text stays close to parchment white so contrast against the dark panels
+    // remains high - the theme is in the surfaces, never in the type.
+    static sf::Color background() { return sf::Color(6, 7, 10); }
+    static sf::Color gridLine() { return sf::Color(74, 62, 42, 26); }
+    static sf::Color panel() { return sf::Color(20, 20, 26, 238); }
+    static sf::Color panelLight() { return sf::Color(32, 31, 39, 238); }
+    static sf::Color panelBorder() { return sf::Color(78, 65, 42); }
+    static sf::Color text() { return sf::Color(237, 232, 221); }
+    static sf::Color dimText() { return sf::Color(152, 144, 130); }
+    static sf::Color balanced() { return sf::Color(104, 164, 108); }
+    static sf::Color warning() { return sf::Color(216, 171, 64); }
+    static sf::Color violation() { return sf::Color(198, 58, 52); }
+    static sf::Color currentVisit() { return sf::Color(108, 158, 200); }
+    static sf::Color skipped() { return sf::Color(80, 76, 70); }
+    static sf::Color gold() { return sf::Color(201, 162, 77); }
+    static sf::Color alarmLow() { return sf::Color(201, 162, 77); }
+    static sf::Color alarmHigh() { return sf::Color(198, 58, 52); }
 
     // ---- rooms (vault doors) ----
-    static sf::Color nodeRing() { return sf::Color(106, 115, 133); }
-    static sf::Color nodeRingLit() { return sf::Color(160, 172, 196); }
-    static sf::Color nodeDisc() { return sf::Color(16, 21, 32); }
-    static sf::Color nodeDiscLit() { return sf::Color(24, 31, 46); }
-    static sf::Color corridor() { return sf::Color(52, 62, 84); }
-    static sf::Color corridorLit() { return sf::Color(76, 154, 255, 200); }
+    static sf::Color nodeRing() { return sf::Color(122, 111, 92); }
+    static sf::Color nodeRingLit() { return sf::Color(208, 181, 120); }
+    static sf::Color nodeDisc() { return sf::Color(16, 16, 21); }
+    static sf::Color nodeDiscLit() { return sf::Color(31, 28, 31); }
+    static sf::Color corridor() { return sf::Color(74, 65, 51); }
+    static sf::Color corridorLit() { return sf::Color(206, 160, 70, 205); }
+
+    // ---- hearthlight (the animated backdrop) ----
+    static sf::Color ember() { return sf::Color(255, 176, 84); }
+    static sf::Color emberDeep() { return sf::Color(214, 86, 34); }   // older, cooling ember
+    static sf::Color hearthGlow() { return sf::Color(150, 84, 28); }
+    static sf::Color torchGlow() { return sf::Color(196, 110, 34); }
+    static sf::Color mist() { return sf::Color(78, 92, 116); }        // cold drifting haze
+    static sf::Color ash() { return sf::Color(176, 186, 204); }       // pale motes falling
 
     // ---- sizes ----
     static float nodeRadius() { return 22.f; }

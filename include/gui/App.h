@@ -51,6 +51,10 @@ public:
     sf::Font monoFont;
     bool debugValidate;
 
+    // The window keeps only a reference to the cursor it was given, so the
+    // object has to live as long as the window does.
+    sf::Cursor pointer;
+
     // Campaign progress, the local leaderboard and the settings. It lives on
     // the App because every menu and every level outcome touches it.
     SaveManager save;

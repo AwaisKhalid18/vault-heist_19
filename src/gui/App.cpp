@@ -1,5 +1,7 @@
 #include "gui/App.h"
 #include "gui/Theme.h"
+#include "gui/Audio.h"
+#include "gui/GoldCursor.h"
 #include "core/TextUtil.h"
 #include "screens/ResultScreen.h"
 #include <iostream>
@@ -52,6 +54,17 @@ bool App::init(const string& windowTitle)
     {
         cout << "Missing assets/fonts/JetBrainsMono.ttf" << endl;
         return false;
+    }
+
+    // The gilded pointer and the sound. Neither is essential: a system that
+    // refuses the cursor bitmap keeps the normal arrow, and a missing music
+    // file still leaves the interface clicks working, so a failure here
+    // reports itself but never stops the game starting.
+    GoldCursor::apply(window, pointer);
+    if (!Audio::init())
+    {
+        cout << "Note: assets/sound/Light of the Seven.mp3 not found; "
+                "menu music disabled." << endl;
     }
     return true;
 }
@@ -246,6 +259,11 @@ void App::run()
         {
             break;
         }
+
+        // The theme runs everywhere: menus, levels, sandbox. Calling this
+        // every frame costs nothing once it is playing, and it restarts the
+        // track if anything ever stops it.
+        Audio::startMusic();
 
         window.clear(Theme::background());
         screens[screenCount - 1]->draw(window);

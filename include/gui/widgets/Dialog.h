@@ -4,6 +4,7 @@
 #include <string>
 #include "gui/widgets/RoundedRect.h"
 #include "gui/widgets/Button.h"
+#include "gui/widgets/KnightHerald.h"
 
 using namespace std;
 
@@ -31,6 +32,8 @@ private:
     RoundedRect panel;
     sf::Text title;
     sf::Text body;
+    KnightHerald herald;
+    float heraldX, heraldY, heraldSide;
     Button buttons[MAX_DIALOG_BUTTONS];
     int buttonCount;
     bool openFlag;

@@ -14,7 +14,7 @@ set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 
 # Build SFML as static libraries so the final exe has no DLL dependencies.
 set(BUILD_SHARED_LIBS OFF)
-set(SFML_BUILD_AUDIO OFF)
+set(SFML_BUILD_AUDIO ON)
 set(SFML_BUILD_NETWORK OFF)
 
 include(FetchContent)
@@ -48,7 +48,7 @@ file(GLOB GUI_SOURCES CONFIGURE_DEPENDS
     src/game/LevelFactoryB.cpp
 )
 add_library(vh_gui STATIC ${GUI_SOURCES})
-target_link_libraries(vh_gui PUBLIC vh_model sfml-graphics)
+target_link_libraries(vh_gui PUBLIC vh_model sfml-graphics sfml-audio)
 
 # ---- Executables ----
 add_executable(vault_heist apps/main.cpp)
@@ -69,3 +69,17 @@ add_custom_command(TARGET vault_heist POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:vault_heist>/assets
 )
+
+# SFML's audio module always needs OpenAL at run time, even in a static build,
+# so put openal32.dll beside the executables.
+if(WIN32)
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(VH_OPENAL "${CMAKE_BINARY_DIR}/_deps/sfml-src/extlibs/bin/x64/openal32.dll")
+    else()
+        set(VH_OPENAL "${CMAKE_BINARY_DIR}/_deps/sfml-src/extlibs/bin/x86/openal32.dll")
+    endif()
+    add_custom_command(TARGET vault_heist POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${VH_OPENAL}" $<TARGET_FILE_DIR:vault_heist>
+    )
+endif()

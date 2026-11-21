@@ -1,5 +1,6 @@
 #include "gui/widgets/Button.h"
 #include "gui/Theme.h"
+#include "gui/Audio.h"
 
 Button::Button()
 {
@@ -78,6 +79,7 @@ bool Button::handleEvent(const sf::Event& e)
         pressed = false;
         if (wasPressed && contains((float)e.mouseButton.x, (float)e.mouseButton.y))
         {
+            Audio::playClick();
             return true;
         }
     }
@@ -86,7 +88,13 @@ bool Button::handleEvent(const sf::Event& e)
 
 void Button::update(float dt, float mouseX, float mouseY)
 {
+    bool wasHovered = hovered;
     hovered = enabled && contains(mouseX, mouseY);
+    // only on the way in, otherwise the tick would retrigger every frame
+    if (hovered && !wasHovered)
+    {
+        Audio::playHover();
+    }
     float target = hovered ? 1.f : 0.f;
     float speed = 8.f * dt;
     if (glow < target)

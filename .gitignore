@@ -7,3 +7,8 @@ bench/results/*.csv
 
 vault_heist_test_save.txt
 vault_heist_save.txt
+
+# The menu theme is a copyrighted track kept out of the repository.
+# Drop your own file at assets/sound/ and the game picks it up; without
+# one it simply starts silent.
+assets/sound/*.mp3
