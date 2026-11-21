@@ -3,8 +3,9 @@
 #include "screens/LevelScreenBase.h"
 
 // 3.3 Manual repair with double rotations. For every strained room the
-// player first NAMES the case (LR or RL), then performs the two drags in
-// order: first at the child, then at the strained room itself.
+// player first NAMES the case (LL, RR, LR or RL), then performs the drags.
+// A double rotation takes two, in order: first at the child, then at the
+// strained room itself. LL and RR take a single drag at the strained room.
 class Level33DoubleRot : public LevelScreenBase
 {
 public:
@@ -24,9 +25,10 @@ private:
     int pendingInserts;
     bool busy;
     int violationId;       // the strained room of the current round
-    int roundCase;         // ROT_LR or ROT_RL
+    int roundCase;         // ROT_LL, ROT_RR, ROT_LR or ROT_RL
     int repairStep;        // 0 = waiting for case name, 1 = first drag, 2 = second drag
 
+    static bool isDoubleCase(int rotCase);
     void refreshViolation();
     void askCase();
     void attemptRotation(int childId, int parentId);

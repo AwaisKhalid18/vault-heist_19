@@ -58,8 +58,8 @@ void Level33DoubleRot::onLevelStart()
     pendingInserts = 0;
     busy = false;
     repairStep = 0;
-    setObjective("Double trouble: these strains need TWO rotations. Name the case "
-                 "first, then rotate at the child, then at the strained room.");
+    setObjective("Double trouble: name the case first. LR and RL need TWO rotations - "
+                 "at the child, then at the strained room. LL and RR need just one.");
     refreshViolation();
 }
 
@@ -80,22 +80,45 @@ void Level33DoubleRot::refreshViolation()
     askCase();
 }
 
+bool Level33DoubleRot::isDoubleCase(int rotCase)
+{
+    return rotCase == Event::ROT_LR || rotCase == Event::ROT_RL;
+}
+
 void Level33DoubleRot::askCase()
 {
     TreeNode* node = tree.findById(violationId);
-    string labels[2];
-    labels[0] = "LR (left-right)";
-    labels[1] = "RL (right-left)";
+    // All four cases are offered. Finishing the first half of a double
+    // rotation leaves the strained room in an LL or RR shape, so limiting
+    // the choice to LR and RL would leave the round with no correct answer.
+    string labels[4];
+    labels[0] = "LL (left-left)";
+    labels[1] = "RR (right-right)";
+    labels[2] = "LR (left-right)";
+    labels[3] = "RL (right-left)";
     openCustomDialog("Name the case",
                      "Room " + TextUtil::intToText(node != nullptr ? node->key : 0)
-                     + " is strained and its heavy child leans the other way.\n"
-                     "Which double rotation repairs it?",
-                     labels, 2);
+                     + " is strained. Look at which side is heavy and which way\n"
+                     "its heavy child leans. Which rotation repairs it?",
+                     labels, 4);
 }
 
 void Level33DoubleRot::onDialogChoice(int button)
 {
-    int chosen = button == 0 ? Event::ROT_LR : Event::ROT_RL;
+    int chosen = Event::ROT_LL;
+    if (button == 1)
+    {
+        chosen = Event::ROT_RR;
+    }
+    else if (button == 2)
+    {
+        chosen = Event::ROT_LR;
+    }
+    else if (button == 3)
+    {
+        chosen = Event::ROT_RL;
+    }
+
     if (chosen != roundCase)
     {
         penalty(2, 50, "Wrong case! Check which way the heavy child leans.");
@@ -106,9 +129,22 @@ void Level33DoubleRot::onDialogChoice(int button)
         return;
     }
     repairStep = 1;
-    flash(roundCase == Event::ROT_LR
-          ? "LR: first drag the child's RIGHT child up, then finish at the strained room."
-          : "RL: first drag the child's LEFT child up, then finish at the strained room.");
+    if (roundCase == Event::ROT_LR)
+    {
+        flash("LR: first drag the child's RIGHT child up, then finish at the strained room.");
+    }
+    else if (roundCase == Event::ROT_RL)
+    {
+        flash("RL: first drag the child's LEFT child up, then finish at the strained room.");
+    }
+    else if (roundCase == Event::ROT_LL)
+    {
+        flash("LL: one rotation - drag the strained room's LEFT child up.");
+    }
+    else
+    {
+        flash("RR: one rotation - drag the strained room's RIGHT child up.");
+    }
 }
 
 void Level33DoubleRot::continueScript()
@@ -151,7 +187,13 @@ void Level33DoubleRot::attemptRotation(int childId, int parentId)
     // which drag is expected right now?
     TreeNode* expectedParent = nullptr;
     bool expectLeftChild = false;
-    if (repairStep == 1)
+    if (!isDoubleCase(roundCase))
+    {
+        // LL and RR are repaired by a single rotation at the strained room
+        expectedParent = violation;
+        expectLeftChild = roundCase == Event::ROT_LL;   // LL is a right rotation
+    }
+    else if (repairStep == 1)
     {
         // rotate at the heavy child, against its lean
         expectedParent = roundCase == Event::ROT_LR ? violation->left : violation->right;
@@ -235,7 +277,8 @@ void Level33DoubleRot::onAnimationDone()
     pendingInserts = 0;
     busy = false;
 
-    if (repairStep == 1)
+    // only a double rotation has a second half; LL and RR are already done
+    if (repairStep == 1 && isDoubleCase(roundCase))
     {
         repairStep = 2;
         flash("Halfway there: now finish at the strained room.");

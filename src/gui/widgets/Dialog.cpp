@@ -122,10 +122,27 @@ void Dialog::layout(float windowW, float windowH)
     {
         h = 240.f;
     }
+    // The panel sits low rather than dead centre, so the strained part of the
+    // tree stays visible while the question is on screen. It is also kept
+    // clear of the toolbar along the bottom.
     float x = (windowW - w) / 2.f;
-    float y = (windowH - h) / 2.f;
+    float free = windowH - h;
+    if (free < 0.f)
+    {
+        free = 0.f;
+    }
+    float y = free * 0.74f;
+    float lowest = windowH - h - 86.f;
+    if (y > lowest)
+    {
+        y = lowest;
+    }
+    if (y < 16.f)
+    {
+        y = 16.f;
+    }
     panel.setRect(x, y, w, h, Theme::panelRadius());
-    panel.setFillColor(sf::Color(18, 24, 37, 250));
+    panel.setFillColor(sf::Color(18, 24, 37, 224));
     panel.setOutline(Theme::gold(), 1.f);
     title.setPosition(x + 32.f, y + 24.f);
     body.setPosition(x + 32.f, y + 86.f);
@@ -185,9 +202,10 @@ void Dialog::draw(sf::RenderWindow& window)
     sf::Vector2u size = window.getSize();
     layout((float)size.x, (float)size.y);
 
-    // dim everything behind the dialog
+    // A light dim only: enough to lift the panel off the background without
+    // hiding the tree the question is asking about.
     sf::RectangleShape dimmer(sf::Vector2f((float)size.x, (float)size.y));
-    dimmer.setFillColor(sf::Color(0, 0, 0, (sf::Uint8)(150.f * fade)));
+    dimmer.setFillColor(sf::Color(0, 0, 0, (sf::Uint8)(64.f * fade)));
     window.draw(dimmer);
 
     panel.drawWithShadow(window);
